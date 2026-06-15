@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Portal de Estudos — Junho 2026 · 2º Ano</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --geo:   #2ec4b6; --geo-l:  #e8faf9; --geo-m:  #b2ede9;
+  --mat:   #4da6ff; --mat-l:  #eaf4ff; --mat-m:  #b8d9ff;
+  --his:   #ff6b6b; --his-l:  #fff0f0; --his-m:  #ffd6d6;
+  --cie:   #06d6a0; --cie-l:  #e6fdf7; --cie-m:  #9aecd8;
+  --lp:    #845ec2; --lp-l:   #f3eefb; --lp-m:   #d5c3f0;
+  --gold:  #ffb830; --gold-l: #fff8e6;
+  --green: #059669; --green-l:#ecfdf5;
+  --bg:    #fafaf8; --surface:#ffffff; --surface2:#f5f5f0; --surface3:#efefea;
+  --tx:    #2d2d2d; --tx2:    #5a5a5a; --tx3:    #9a9a8a;
+  --border:#e8e8e0; --border2:#d8d8cc;
+  --sh-sm: 0 2px 8px rgba(0,0,0,.08);
+  --sh-md: 0 4px 16px rgba(0,0,0,.10);
+  --r-sm:10px;--r-md:16px;--r-lg:22px;--r-xl:28px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-tap-highlight-color:transparent;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(circle,#e0e0d8 1px,transparent 1px);background-size:28px 28px;opacity:.4;pointer-events:none;z-index:0;}
+.shell{max-width:880px;margin:0 auto;position:relative;z-index:1;}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#1a5fa8 0%,#2ec4b6 50%,#845ec2 100%);background-size:200% 200%;animation:gs 7s ease infinite;padding:26px 24px 22px;text-align:center;position:relative;overflow:hidden;}
+@keyframes gs{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.header::after{content:'🌟';position:absolute;right:20px;top:14px;font-size:2.4rem;opacity:.2;animation:spin 8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.header-emoji{font-size:2.2rem;margin-bottom:6px;display:block;}
+.header h1{font-family:'Baloo 2',cursive;font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.2);margin-bottom:4px;}
+.header-sub{color:rgba(255,255,255,.85);font-size:.8rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;}
+
+/* NAV */
+.nav-wrap{background:var(--surface);box-shadow:var(--sh-sm);overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100;border-bottom:3px solid #e0e0d8;}
+.nav-wrap::-webkit-scrollbar{display:none;}
+nav{display:flex;min-width:max-content;}
+.nb{background:none;border:none;border-bottom:4px solid transparent;padding:13px 16px 10px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.79rem;color:var(--tx3);cursor:pointer;white-space:nowrap;transition:all .2s;}
+.nb:hover{color:var(--tx2);}
+.nb.on-home{color:var(--tx);border-bottom-color:var(--tx);}
+.nb.on-geo{color:var(--geo);border-bottom-color:var(--geo);}
+.nb.on-mat{color:var(--mat);border-bottom-color:var(--mat);}
+.nb.on-his{color:var(--his);border-bottom-color:var(--his);}
+.nb.on-cie{color:var(--cie);border-bottom-color:var(--cie);}
+.nb.on-lp{color:var(--lp);border-bottom-color:var(--lp);}
+
+/* MAIN */
+.main{padding:22px 20px;}
+.page{display:none;}
+.page.active{display:block;animation:fu .28s ease;}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* SECTION TITLE */
+.stitle{font-family:'Baloo 2',cursive;font-size:1.2rem;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.stag{font-family:'Nunito',sans-serif;font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;background:var(--surface3);color:var(--tx3);border-radius:6px;padding:2px 8px;}
+.sdiv{height:2px;background:var(--border);border-radius:2px;margin:20px 0;}
+
+/* HOME — CRONOGRAMA */
+.crono-grid{display:grid;gap:8px;margin-bottom:22px;}
+.crono-day{background:var(--surface);border-radius:var(--r-md);border:2px solid var(--border);padding:14px 16px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--sh-sm);cursor:pointer;transition:transform .15s,box-shadow .15s;}
+.crono-day:hover{transform:translateY(-1px);box-shadow:var(--sh-md);}
+.crono-day.pausa{background:#fffbeb;border-color:#fde68a;cursor:default;}
+.crono-day.prova-day{border-style:dashed;}
+.cd-num{font-family:'Baloo 2',cursive;font-size:1.3rem;min-width:32px;text-align:center;flex-shrink:0;line-height:1.2;}
+.cd-date{font-size:.7rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:3px;}
+.cd-title{font-weight:900;font-size:.9rem;margin-bottom:2px;}
+.cd-desc{font-size:.78rem;color:var(--tx2);line-height:1.4;}
+.cd-badge{display:inline-block;font-size:.65rem;font-weight:900;border-radius:20px;padding:2px 8px;margin-top:5px;border:1.5px solid;}
+.b-geo{background:var(--geo-l);color:#00897b;border-color:var(--geo-m);}
+.b-mat{background:var(--mat-l);color:#1e62c4;border-color:var(--mat-m);}
+.b-his{background:var(--his-l);color:#c0392b;border-color:var(--his-m);}
+.b-cie{background:var(--cie-l);color:#065f46;border-color:var(--cie-m);}
+.b-lp{background:var(--lp-l);color:var(--lp);border-color:var(--lp-m);}
+.b-pausa{background:#fffbeb;color:#b45309;border-color:#fde68a;}
+.b-prova{background:#fff0f0;color:#c0392b;border-color:#ffd6d6;}
+
+/* HOME — matéria cards */
+.subj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:20px;}
+.sc{border-radius:var(--r-lg);padding:16px 14px;border:2px solid;cursor:pointer;transition:transform .18s,box-shadow .18s;background:var(--surface);box-shadow:var(--sh-sm);text-align:center;}
+.sc:hover{transform:translateY(-2px);box-shadow:var(--sh-md);}
+.sc-ico{font-size:2rem;display:block;margin-bottom:8px;}
+.sc-name{font-weight:900;font-size:.88rem;margin-bottom:3px;}
+.sc-date{font-size:.7rem;color:var(--tx3);font-weight:800;}
+.sc.geo{border-color:var(--geo-m);} .sc.geo .sc-name{color:var(--geo);}
+.sc.mat{border-color:var(--mat-m);} .sc.mat .sc-name{color:var(--mat);}
+.sc.his{border-color:var(--his-m);} .sc.his .sc-name{color:var(--his);}
+.sc.cie{border-color:var(--cie-m);} .sc.cie .sc-name{color:var(--cie);}
+.sc.lp{border-color:var(--lp-m);}  .sc.lp  .sc-name{color:var(--lp);}
+
+/* INFO BOX */
+.info-box{background:var(--surface);border-radius:var(--r-md);padding:16px 18px;border:1.5px solid var(--border);box-shadow:var(--sh-sm);margin-bottom:14px;}
+.info-box h4{font-weight:900;font-size:.9rem;margin-bottom:9px;}
+.ig{display:grid;gap:6px;}
+.irow{display:flex;gap:8px;font-size:.81rem;color:var(--tx2);line-height:1.45;}
+.irow .ic{flex-shrink:0;width:22px;text-align:center;}
+.irow strong{color:var(--tx);}
+.dica{background:var(--gold-l);border-radius:var(--r-sm);padding:10px 13px;border:1.5px solid #fde68a;font-size:.81rem;color:#7a4f00;display:flex;gap:8px;margin-top:10px;}
+
+/* FLASHCARDS */
+.fc-hint-bar{text-align:center;font-size:.73rem;color:var(--tx3);font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;justify-content:center;}
+.fc-hint-bar::before,.fc-hint-bar::after{content:'';flex:1;height:1.5px;background:var(--border);}
+.fc-section{margin-bottom:24px;}
+.fc-sub{font-size:.78rem;font-weight:900;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;padding-bottom:7px;border-bottom:1.5px solid var(--border);}
+.fc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.fc-wrap{perspective:900px;cursor:pointer;height:210px;}
+.fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .44s cubic-bezier(.4,.2,.2,1);}
+.fc-wrap.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--r-lg);padding:18px 16px;display:flex;flex-direction:column;justify-content:center;}
+.fc-back{transform:rotateY(180deg);}
+/* per-subject card colours */
+.geo-fc .fc-front{background:linear-gradient(145deg,#00897b,var(--geo));box-shadow:0 5px 18px rgba(46,196,182,.3);}
+.geo-fc .fc-back{background:var(--surface);border:2px solid var(--geo-m);box-shadow:0 4px 14px rgba(46,196,182,.15);}
+.mat-fc .fc-front{background:linear-gradient(145deg,#1e62c4,var(--mat));box-shadow:0 5px 18px rgba(77,166,255,.3);}
+.mat-fc .fc-back{background:var(--surface);border:2px solid var(--mat-m);box-shadow:0 4px 14px rgba(77,166,255,.15);}
+.his-fc .fc-front{background:linear-gradient(145deg,#c0392b,var(--his));box-shadow:0 5px 18px rgba(255,107,107,.3);}
+.his-fc .fc-back{background:var(--surface);border:2px solid var(--his-m);box-shadow:0 4px 14px rgba(255,107,107,.15);}
+.cie-fc .fc-front{background:linear-gradient(145deg,#059669,var(--cie));box-shadow:0 5px 18px rgba(6,214,160,.3);}
+.cie-fc .fc-back{background:var(--surface);border:2px solid var(--cie-m);box-shadow:0 4px 14px rgba(6,214,160,.15);}
+.lp-fc .fc-front{background:linear-gradient(145deg,#6b3fa0,var(--lp));box-shadow:0 5px 18px rgba(132,94,194,.3);}
+.lp-fc .fc-back{background:var(--surface);border:2px solid var(--lp-m);box-shadow:0 4px 14px rgba(132,94,194,.15);}
+.fc-label{font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.1em;opacity:.75;margin-bottom:7px;color:rgba(255,255,255,.9);}
+.fc-q{font-size:.96rem;font-weight:900;color:#fff;line-height:1.4;flex:1;display:flex;align-items:center;}
+.fc-hint{font-size:.67rem;font-weight:700;color:rgba(255,255,255,.65);margin-top:9px;}
+.fc-back-label{font-size:.62rem;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--tx3);margin-bottom:7px;}
+.fc-ans{font-size:.83rem;color:var(--tx);line-height:1.6;flex:1;}
+.fc-eg{background:var(--surface2);border-radius:8px;padding:7px 11px;margin-top:7px;font-size:.77rem;line-height:1.65;color:var(--tx2);}
+.geo-fc .fc-ans strong{color:#00897b;} .geo-fc .fc-eg b{color:#00897b;}
+.mat-fc .fc-ans strong{color:#1e62c4;} .mat-fc .fc-eg b{color:#1e62c4;}
+.his-fc .fc-ans strong{color:#c0392b;} .his-fc .fc-eg b{color:#c0392b;}
+.cie-fc .fc-ans strong{color:#059669;} .cie-fc .fc-eg b{color:#059669;}
+.lp-fc  .fc-ans strong{color:var(--lp);} .lp-fc .fc-eg b{color:var(--lp);}
+
+/* QUIZ */
+.quiz-block{background:var(--surface);border-radius:var(--r-lg);border:2px solid var(--border);padding:18px;margin-bottom:14px;box-shadow:var(--sh-sm);}
+.qb-title{font-family:'Baloo 2',cursive;font-size:1.05rem;margin-bottom:2px;}
+.qb-sub{font-size:.76rem;color:var(--tx3);margin-bottom:12px;}
+.qz-q{background:var(--surface2);border-radius:var(--r-md);padding:14px;}
+.qz-meta{font-size:.67rem;font-weight:800;color:var(--tx3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px;}
+.qz-txt{font-weight:800;font-size:.91rem;margin-bottom:11px;color:var(--tx);line-height:1.45;}
+.qz-opts{display:flex;flex-direction:column;gap:6px;}
+.qz-opt{background:var(--surface);border:1.5px solid var(--border2);border-radius:var(--r-sm);padding:9px 13px;font-family:'Nunito',sans-serif;font-weight:700;font-size:.84rem;color:var(--tx);cursor:pointer;text-align:left;transition:all .17s;box-shadow:var(--sh-sm);}
+.qz-opt.ok{background:var(--green-l);border-color:var(--green);color:#065f46;font-weight:900;}
+.qz-opt.er{background:var(--his-l);border-color:var(--his);color:#9b1c1c;}
+.qz-opt.lk{pointer-events:none;} .qz-opt.ok.lk{opacity:1;}
+.qz-fb{margin-top:8px;font-weight:800;font-size:.83rem;display:none;}
+.qz-fb.sh{display:block;} .qz-fb.ok{color:var(--green);} .qz-fb.er{color:var(--his);}
+.qz-nxt{margin-top:9px;color:#fff;border:none;border-radius:var(--r-sm);padding:9px 20px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.83rem;cursor:pointer;display:none;transition:opacity .2s;}
+.qz-nxt:hover{opacity:.88;}
+.nxt-geo{background:var(--geo);} .nxt-mat{background:var(--mat);} .nxt-his{background:var(--his);} .nxt-cie{background:var(--cie);} .nxt-lp{background:var(--lp);}
+.qz-fin{background:var(--green-l);border-radius:var(--r-md);padding:20px;border:2px solid var(--cie-m);text-align:center;}
+.qz-fin-emo{font-size:2.4rem;display:block;margin-bottom:7px;}
+.qz-fin-score{font-family:'Baloo 2',cursive;font-size:1.6rem;color:var(--green);margin-bottom:4px;}
+.qz-fin-msg{color:var(--tx2);font-size:.83rem;margin-bottom:13px;}
+.qz-retry{background:var(--surface);color:var(--tx);border:1.5px solid var(--border2);border-radius:var(--r-sm);padding:8px 20px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;cursor:pointer;}
+
+/* SIMULADO */
+.sim-block{background:var(--surface);border-radius:var(--r-lg);border:2px solid;margin-bottom:14px;overflow:hidden;box-shadow:var(--sh-sm);}
+.sim-block.geo{border-color:var(--geo-m);} .sim-block.mat{border-color:var(--mat-m);} .sim-block.his{border-color:var(--his-m);} .sim-block.cie{border-color:var(--cie-m);} .sim-block.lp{border-color:var(--lp-m);}
+.sim-head{padding:14px 18px;border-bottom:2px solid;display:flex;align-items:center;gap:11px;}
+.sim-block.geo .sim-head{background:var(--geo-l);border-bottom-color:var(--geo-m);}
+.sim-block.mat .sim-head{background:var(--mat-l);border-bottom-color:var(--mat-m);}
+.sim-block.his .sim-head{background:var(--his-l);border-bottom-color:var(--his-m);}
+.sim-block.cie .sim-head{background:var(--cie-l);border-bottom-color:var(--cie-m);}
+.sim-block.lp  .sim-head{background:var(--lp-l); border-bottom-color:var(--lp-m);}
+.sim-head-ico{font-size:1.8rem;flex-shrink:0;}
+.sim-head-title{font-family:'Baloo 2',cursive;font-size:1.05rem;}
+.sim-block.geo .sim-head-title{color:#00897b;} .sim-block.mat .sim-head-title{color:#1e62c4;}
+.sim-block.his .sim-head-title{color:#c0392b;} .sim-block.cie .sim-head-title{color:#065f46;}
+.sim-block.lp  .sim-head-title{color:var(--lp);}
+.sim-head-sub{font-size:.74rem;color:var(--tx3);margin-top:2px;}
+.sim-body{padding:16px 18px;}
+
+/* MAPA MENTAL */
+.mapa-centro{text-align:center;margin-bottom:18px;}
+.mapa-centro-box{display:inline-block;background:linear-gradient(135deg,#1a5fa8,#2ec4b6);color:#fff;border-radius:var(--r-xl);padding:10px 22px;font-family:'Baloo 2',cursive;font-size:1.1rem;box-shadow:0 4px 14px rgba(46,196,182,.3);}
+.mapa-branches{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:11px;}
+.mb{border-radius:var(--r-md);padding:14px;border:2px solid;}
+.mb h4{font-weight:900;font-size:.84rem;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.mb ul{padding-left:17px;}
+.mb li{font-size:.77rem;color:var(--tx2);margin-bottom:3px;line-height:1.4;}
+.mb li b{color:var(--tx);}
+.mb.geo{border-color:var(--geo-m);background:var(--geo-l);} .mb.geo h4{color:#00897b;}
+.mb.mat{border-color:var(--mat-m);background:var(--mat-l);} .mb.mat h4{color:#1e62c4;}
+.mb.his{border-color:var(--his-m);background:var(--his-l);} .mb.his h4{color:#c0392b;}
+.mb.cie{border-color:var(--cie-m);background:var(--cie-l);} .mb.cie h4{color:#065f46;}
+.mb.lp{border-color:var(--lp-m);background:var(--lp-l);}   .mb.lp  h4{color:var(--lp);}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.chip{font-size:.73rem;font-weight:800;border-radius:20px;padding:3px 9px;border:1.5px solid;}
+.chip.geo{background:var(--geo-l);color:#00897b;border-color:var(--geo-m);}
+.chip.mat{background:var(--mat-l);color:#1e62c4;border-color:var(--mat-m);}
+.chip.his{background:var(--his-l);color:#c0392b;border-color:var(--his-m);}
+.chip.cie{background:var(--cie-l);color:#065f46;border-color:var(--cie-m);}
+.chip.lp{background:var(--lp-l);color:var(--lp);border-color:var(--lp-m);}
+.chip.ok{background:var(--green-l);color:var(--green);border-color:var(--cie-m);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:14px 24px;text-align:center;}
+footer div{font-size:.72rem;color:var(--tx3);}
+
+@media(max-width:500px){
+  .subj-grid{grid-template-columns:repeat(3,1fr);}
+  .fc-grid{grid-template-columns:1fr;}
+  .mapa-branches{grid-template-columns:1fr;}
+  .main{padding:16px 14px;}
+  .nb{padding:11px 12px 9px;font-size:.75rem;}
+}
+/* ── HEADER DARK + STARS ── */
+.header{background:linear-gradient(160deg,#0a1628 0%,#1a3a6e 40%,#0e5a5a 75%,#3d1a6e 100%)!important;position:relative;overflow:hidden;}
+.header::after{display:none!important;}
+.hdr-stars{position:absolute;inset:0;pointer-events:none;}
+.star{position:absolute;border-radius:50%;background:#fff;animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s);}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.9;transform:scale(1.4)}}
+.hdr-top{position:relative;z-index:1;}
+.hdr-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:5px 14px;font-size:.72rem;font-weight:900;color:rgba(255,255,255,.85);letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px;}
+.hdr-grad{background:linear-gradient(90deg,#ffd84d,#2ec4b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hdr-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px;}
+.hp{display:flex;align-items:center;gap:5px;border-radius:50px;padding:7px 16px;font-size:.76rem;font-weight:900;border:1.5px solid;cursor:pointer;background:rgba(255,255,255,.05);transition:all .2s;font-family:'Nunito',sans-serif;}
+.hp:hover{transform:translateY(-2px);background:rgba(255,255,255,.12);}
+.hp.geo{border-color:rgba(46,196,182,.5);color:#5fe0d2;}
+.hp.mat{border-color:rgba(77,166,255,.5);color:#8ec5ff;}
+.hp.his{border-color:rgba(255,107,107,.5);color:#ff9d9d;}
+.hp.cie{border-color:rgba(6,214,160,.5);color:#5eebc2;}
+.hp.lp{border-color:rgba(132,94,194,.5);color:#b89adb;}
+/* ── SUBJECT HERO BANNER ── */
+.subj-hero{border-radius:28px;padding:26px 24px 22px;margin-bottom:20px;position:relative;overflow:hidden;}
+.subj-hero::after{position:absolute;right:16px;bottom:-8px;font-size:6rem;opacity:.12;pointer-events:none;}
+.sh-geo{background:linear-gradient(135deg,#004d47 0%,#00897b 60%,#2ec4b6 100%);}
+.sh-geo::after{content:"🌍";}
+.sh-mat{background:linear-gradient(135deg,#0a2a6e 0%,#1e62c4 60%,#4da6ff 100%);}
+.sh-mat::after{content:"🔢";}
+.sh-his{background:linear-gradient(135deg,#7f0000 0%,#c0392b 60%,#ff6b6b 100%);}
+.sh-his::after{content:"🏛️";}
+.sh-cie{background:linear-gradient(135deg,#004d35 0%,#059669 60%,#06d6a0 100%);}
+.sh-cie::after{content:"🔬";}
+.sh-lp{background:linear-gradient(135deg,#2d0060 0%,#6b3fa0 60%,#845ec2 100%);}
+.sh-lp::after{content:"📖";}
+.sh-inner{position:relative;z-index:1;}
+.sh-eyebrow{font-size:.67rem;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.65);margin-bottom:6px;}
+.sh-title{font-family:'Baloo 2',cursive;font-size:clamp(1.5rem,4vw,2.2rem);color:#fff;margin-bottom:6px;text-shadow:0 2px 10px rgba(0,0,0,.25);}
+.sh-sub{font-size:.82rem;color:rgba(255,255,255,.78);font-weight:700;margin-bottom:16px;line-height:1.4;}
+.sh-stats{display:flex;gap:22px;flex-wrap:wrap;}
+.sh-stat-num{font-family:'Baloo 2',cursive;font-size:1.5rem;color:#fff;line-height:1;}
+.sh-stat-lbl{font-size:.63rem;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.6);}
+.sh-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+.sh-tag{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.92);border-radius:50px;padding:4px 12px;font-size:.72rem;font-weight:800;}
+/* ── QUIZ BLOCK HEADER ── */
+.qblock-hd{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.qblock-ico{font-size:1.7rem;flex-shrink:0;}
+.qblock-htitle{font-family:'Baloo 2',cursive;font-size:1rem;margin-bottom:2px;}
+.qblock-hsub{font-size:.74rem;color:var(--tx3);}
+/* ── GAMIFICAÇÃO: JORNADA DE ESTRELAS ── */
+.journey{border-radius:24px;padding:18px 20px;margin-bottom:18px;border:2px solid;position:relative;overflow:hidden;}
+.journey.geo{background:var(--geo-l);border-color:var(--geo-m);}
+.journey.mat{background:var(--mat-l);border-color:var(--mat-m);}
+.journey.his{background:var(--his-l);border-color:var(--his-m);}
+.journey.cie{background:var(--cie-l);border-color:var(--cie-m);}
+.journey.lp{background:var(--lp-l);border-color:var(--lp-m);}
+.journey-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.journey-medal{font-size:2.6rem;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.15));}
+.journey-info{flex:1;min-width:0;}
+.journey-level{font-family:'Baloo 2',cursive;font-size:1.15rem;line-height:1.1;}
+.journey.geo .journey-level{color:var(--geo-d);}
+.journey.mat .journey-level{color:var(--mat-d);}
+.journey.his .journey-level{color:var(--his-d);}
+.journey.cie .journey-level{color:var(--cie-d);}
+.journey.lp .journey-level{color:var(--lp-d);}
+.journey-stars{font-size:.82rem;font-weight:800;color:var(--tx2);margin-top:2px;}
+.journey-stars b{color:var(--gold);}
+.journey-bar-wrap{background:rgba(0,0,0,.07);border-radius:50px;height:14px;overflow:hidden;position:relative;}
+.journey-bar{height:100%;border-radius:50px;transition:width .6s cubic-bezier(.3,1.2,.5,1);position:relative;}
+.journey.geo .journey-bar{background:linear-gradient(90deg,var(--geo-d),var(--geo));}
+.journey.mat .journey-bar{background:linear-gradient(90deg,var(--mat-d),var(--mat));}
+.journey.his .journey-bar{background:linear-gradient(90deg,var(--his-d),var(--his));}
+.journey.cie .journey-bar{background:linear-gradient(90deg,var(--cie-d),var(--cie));}
+.journey.lp .journey-bar{background:linear-gradient(90deg,var(--lp-d),var(--lp));}
+.journey-next{font-size:.7rem;font-weight:700;color:var(--tx3);margin-top:7px;text-align:center;}
+.journey-badges{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap;justify-content:center;}
+.jbadge{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:2px solid;background:var(--srf);transition:transform .2s;}
+.jbadge.locked{opacity:.32;filter:grayscale(1);}
+.jbadge.unlocked{animation:pop .4s ease;}
+.journey.geo .jbadge{border-color:var(--geo-m);}
+.journey.mat .jbadge{border-color:var(--mat-m);}
+.journey.his .jbadge{border-color:var(--his-m);}
+.journey.cie .jbadge{border-color:var(--cie-m);}
+.journey.lp .jbadge{border-color:var(--lp-m);}
+@keyframes pop{0%{transform:scale(0)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+/* Pontos ganhos — toast */
+.pts-toast{position:fixed;left:50%;top:30%;transform:translateX(-50%) scale(.6);background:linear-gradient(135deg,var(--gold),#ff9d00);color:#fff;font-family:'Baloo 2',cursive;font-size:1.4rem;padding:16px 28px;border-radius:20px;box-shadow:0 8px 30px rgba(255,150,0,.5);z-index:9999;opacity:0;pointer-events:none;text-align:center;}
+.pts-toast.show{animation:ptsToast 1.8s ease forwards;}
+@keyframes ptsToast{0%{opacity:0;transform:translateX(-50%) scale(.6)}20%{opacity:1;transform:translateX(-50%) scale(1.1)}35%{transform:translateX(-50%) scale(1)}80%{opacity:1;transform:translateX(-50%) scale(1) translateY(0)}100%{opacity:0;transform:translateX(-50%) scale(.9) translateY(-30px)}}
+/* Level-up celebration */
+.levelup{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9998;display:none;align-items:center;justify-content:center;padding:24px;}
+.levelup.show{display:flex;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.levelup-card{background:var(--srf);border-radius:28px;padding:32px 28px;text-align:center;max-width:340px;box-shadow:0 20px 60px rgba(0,0,0,.4);animation:popCard .45s cubic-bezier(.3,1.3,.5,1);}
+@keyframes popCard{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
+.levelup-medal{font-size:4.5rem;display:block;margin-bottom:8px;animation:spin2 .8s ease;}
+@keyframes spin2{from{transform:rotate(-20deg) scale(.5)}to{transform:rotate(0) scale(1)}}
+.levelup-title{font-family:'Baloo 2',cursive;font-size:1.6rem;color:var(--gold);margin-bottom:6px;}
+.levelup-msg{font-size:.92rem;color:var(--tx2);line-height:1.5;margin-bottom:18px;}
+.levelup-btn{background:linear-gradient(135deg,var(--gold),#ff9d00);color:#fff;border:none;border-radius:14px;padding:11px 30px;font-family:'Nunito',sans-serif;font-weight:900;font-size:.95rem;cursor:pointer;box-shadow:0 4px 14px rgba(255,150,0,.4);}
+/* Reset button */
+.journey-reset{position:absolute;top:10px;right:12px;background:rgba(0,0,0,.06);border:none;border-radius:50px;padding:3px 10px;font-size:.62rem;font-weight:800;color:var(--tx3);cursor:pointer;font-family:'Nunito',sans-serif;}
+.journey-reset:hover{background:rgba(0,0,0,.12);}
+/* ── DESAFIO RELÂMPAGO ── */
+.relampago{border-radius:24px;border:2px dashed;padding:0;margin-bottom:14px;overflow:hidden;}
+.relampago.geo{border-color:var(--geo);} .relampago.mat{border-color:var(--mat);}
+.relampago.his{border-color:var(--his);} .relampago.cie{border-color:var(--cie);} .relampago.lp{border-color:var(--lp);}
+.rel-head{padding:16px 20px;display:flex;align-items:center;gap:12px;}
+.relampago.geo .rel-head{background:var(--geo-l);} .relampago.mat .rel-head{background:var(--mat-l);}
+.relampago.his .rel-head{background:var(--his-l);} .relampago.cie .rel-head{background:var(--cie-l);} .relampago.lp .rel-head{background:var(--lp-l);}
+.rel-ico{font-size:1.9rem;animation:bolt 1.5s ease-in-out infinite;}
+@keyframes bolt{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.15) rotate(-8deg)}}
+.rel-title{font-family:'Baloo 2',cursive;font-size:1.1rem;}
+.relampago.geo .rel-title{color:var(--geo-d);} .relampago.mat .rel-title{color:var(--mat-d);}
+.relampago.his .rel-title{color:var(--his-d);} .relampago.cie .rel-title{color:var(--cie-d);} .relampago.lp .rel-title{color:var(--lp-d);}
+.rel-sub{font-size:.74rem;color:var(--tx3);margin-top:2px;}
+.rel-body{padding:18px 20px;}
+.rel-start{width:100%;color:#fff;border:none;border-radius:14px;padding:13px;font-family:'Baloo 2',cursive;font-size:1.05rem;cursor:pointer;transition:transform .15s,opacity .2s;}
+.rel-start:hover{transform:translateY(-2px);}
+.relampago.geo .rel-start{background:linear-gradient(135deg,var(--geo-d),var(--geo));}
+.relampago.mat .rel-start{background:linear-gradient(135deg,var(--mat-d),var(--mat));}
+.relampago.his .rel-start{background:linear-gradient(135deg,var(--his-d),var(--his));}
+.relampago.cie .rel-start{background:linear-gradient(135deg,var(--cie-d),var(--cie));}
+.relampago.lp .rel-start{background:linear-gradient(135deg,var(--lp-d),var(--lp));}
+.rel-record{text-align:center;font-size:.8rem;font-weight:800;color:var(--tx2);margin-top:10px;}
+.rel-record b{color:var(--gold);}
+.rel-timer-wrap{background:rgba(0,0,0,.07);border-radius:50px;height:10px;overflow:hidden;margin-bottom:14px;}
+.rel-timer{height:100%;border-radius:50px;width:100%;transition:width .1s linear;}
+.relampago.geo .rel-timer{background:var(--geo);} .relampago.mat .rel-timer{background:var(--mat);}
+.relampago.his .rel-timer{background:var(--his);} .relampago.cie .rel-timer{background:var(--cie);} .relampago.lp .rel-timer{background:var(--lp);}
+.rel-timer.danger{background:var(--his)!important;}
+.rel-qcount{font-size:.66rem;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3);margin-bottom:8px;display:flex;justify-content:space-between;}
+.rel-score-live{color:var(--gold);}
+/* ── VAI ALÉM ── */
+.beyond{border-radius:20px;border:2px solid;padding:18px 20px;margin-bottom:12px;}
+.beyond.geo{background:var(--geo-l);border-color:var(--geo-m);} .beyond.mat{background:var(--mat-l);border-color:var(--mat-m);}
+.beyond.his{background:var(--his-l);border-color:var(--his-m);} .beyond.cie{background:var(--cie-l);border-color:var(--cie-m);} .beyond.lp{background:var(--lp-l);border-color:var(--lp-m);}
+.beyond-q{display:flex;gap:10px;align-items:flex-start;}
+.beyond-spark{font-size:1.3rem;flex-shrink:0;}
+.beyond-text{font-weight:800;font-size:.92rem;line-height:1.45;color:var(--tx);}
+.beyond-toggle{margin-top:12px;background:var(--srf);border:1.5px solid;border-radius:50px;padding:7px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;cursor:pointer;transition:all .15s;}
+.beyond.geo .beyond-toggle{color:var(--geo-d);border-color:var(--geo-m);} .beyond.mat .beyond-toggle{color:var(--mat-d);border-color:var(--mat-m);}
+.beyond.his .beyond-toggle{color:var(--his-d);border-color:var(--his-m);} .beyond.cie .beyond-toggle{color:var(--cie-d);border-color:var(--cie-m);} .beyond.lp .beyond-toggle{color:var(--lp-d);border-color:var(--lp-m);}
+.beyond-toggle:hover{transform:translateY(-1px);}
+.beyond-idea{display:none;margin-top:12px;padding:13px 15px;background:var(--srf);border-radius:14px;font-size:.84rem;line-height:1.6;color:var(--tx2);}
+.beyond-idea.show{display:block;animation:fu .3s ease;}
+.beyond-idea b{color:var(--tx);}
+.beyond-idea .nudge{display:block;margin-top:8px;font-style:italic;font-size:.8rem;color:var(--tx3);}
+/* ── ERRO QUE EXPLICA ── */
+.qz-why{margin-top:8px;padding:10px 13px;background:var(--gold-l);border:1.5px solid var(--gold-m);border-radius:12px;font-size:.81rem;font-weight:600;color:#78350f;line-height:1.5;}
+.qz-why b{color:#92400e;}
+/* ── GLOSSÁRIO ILUSTRADO ── */
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.gloss-card{border-radius:16px;border:2px solid;padding:14px;background:var(--srf);box-shadow:var(--sh1);transition:transform .15s;}
+.gloss-card:hover{transform:translateY(-2px);}
+.gloss-card.geo{border-color:var(--geo-m);} .gloss-card.mat{border-color:var(--mat-m);}
+.gloss-card.his{border-color:var(--his-m);} .gloss-card.cie{border-color:var(--cie-m);} .gloss-card.lp{border-color:var(--lp-m);}
+.gloss-top{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.gloss-emo{font-size:1.6rem;}
+.gloss-word{font-family:'Baloo 2',cursive;font-size:1.02rem;}
+.gloss-card.geo .gloss-word{color:var(--geo-d);} .gloss-card.mat .gloss-word{color:var(--mat-d);}
+.gloss-card.his .gloss-word{color:var(--his-d);} .gloss-card.cie .gloss-word{color:var(--cie-d);} .gloss-card.lp .gloss-word{color:var(--lp-d);}
+.gloss-def{font-size:.82rem;color:var(--tx2);line-height:1.5;}
+.gloss-def b{color:var(--tx);}
+/* ── RESUMO ANTES DA PROVA ── */
+.resumo{border-radius:20px;border:2px solid;padding:18px 20px;margin-bottom:14px;}
+.resumo.geo{background:var(--geo-l);border-color:var(--geo-m);} .resumo.mat{background:var(--mat-l);border-color:var(--mat-m);}
+.resumo.his{background:var(--his-l);border-color:var(--his-m);} .resumo.cie{background:var(--cie-l);border-color:var(--cie-m);} .resumo.lp{background:var(--lp-l);border-color:var(--lp-m);}
+.resumo-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.resumo-ico{font-size:1.6rem;}
+.resumo-title{font-family:'Baloo 2',cursive;font-size:1.1rem;}
+.resumo.geo .resumo-title{color:var(--geo-d);} .resumo.mat .resumo-title{color:var(--mat-d);}
+.resumo.his .resumo-title{color:var(--his-d);} .resumo.cie .resumo-title{color:var(--cie-d);} .resumo.lp .resumo-title{color:var(--lp-d);}
+.resumo-list{list-style:none;display:grid;gap:8px;}
+.resumo-item{display:flex;gap:10px;align-items:flex-start;background:var(--srf);border-radius:12px;padding:10px 13px;cursor:pointer;transition:background .15s;}
+.resumo-item:hover{background:rgba(255,255,255,.6);}
+.resumo-check{flex-shrink:0;width:22px;height:22px;border-radius:7px;border:2px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .15s;}
+.resumo-item.done .resumo-check{background:var(--green);border-color:var(--green);color:#fff;}
+.resumo-text{font-size:.84rem;color:var(--tx);line-height:1.45;font-weight:600;}
+.resumo-item.done .resumo-text{text-decoration:line-through;color:var(--tx3);}
+.resumo-text b{color:var(--tx);}
+.resumo-item.done .resumo-text b{color:var(--tx3);}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="header">
+  <div class="hdr-stars" id="hdrstars"></div>
+  <div class="hdr-top">
+    <div class="hdr-badge">📅 Avaliações · 2ª Etapa · 2º Período</div>
+    <h1>Portal de Estudos<br><span class="hdr-grad">Junho 2026</span></h1>
+    <p class="header-sub">2º Ano · 5 matérias · Provas de 22 a 26 de junho</p>
+    <div class="hdr-pills">
+      <button class="hp geo" onclick="goPage('geo')">🌍 Geo · 23/06</button>
+      <button class="hp mat" onclick="goPage('mat')">🔢 Mat · 24/06</button>
+      <button class="hp his" onclick="goPage('his')">🏛️ Hist · 25/06</button>
+      <button class="hp cie" onclick="goPage('cie')">🔬 Cien · 26/06</button>
+      <button class="hp lp"  onclick="goPage('lp')">📖 Port · 27/06</button>
+    </div>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <nav>
+    <button class="nb on-home" data-page="home"  data-on="on-home">🏠 Cronograma</button>
+    <button class="nb" data-page="geo"   data-on="on-geo">🌍 Geografia</button>
+    <button class="nb" data-page="mat"   data-on="on-mat">🔢 Matemática</button>
+    <button class="nb" data-page="his"   data-on="on-his">🏛️ História</button>
+    <button class="nb" data-page="cie"   data-on="on-cie">🔬 Ciências</button>
+    <button class="nb" data-page="lp"    data-on="on-lp">📖 Português</button>
+  </nav>
+</div>
+
+<div class="main">
+
+<!-- ══ HOME / CRONOGRAMA ══ -->
+<div class="page active" id="page-home">
+
+  <div class="stitle">📅 Cronograma de Estudos <span class="stag">15 a 26 de junho</span></div>
+
+  <div class="crono-grid">
+    <div class="crono-day" onclick="goPage('geo')">
+      <div class="cd-num" style="color:var(--geo)">1</div>
+      <div><div class="cd-date">Domingo · 15/06</div><div class="cd-title">🌍 Geografia — Revisão Geral</div><div class="cd-desc">Lugar para morar · pontos de referência · tipos de moradia</div><span class="cd-badge b-geo">Prova em 7 dias</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('geo')">
+      <div class="cd-num" style="color:var(--geo)">2</div>
+      <div><div class="cd-date">Segunda · 16/06</div><div class="cd-title">🌍 Geografia — Reforço + Simulado</div><div class="cd-desc">Meus caminhos · pontos de referência · segurança no trânsito</div><span class="cd-badge b-geo">Prova em 6 dias</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('mat')">
+      <div class="cd-num" style="color:var(--mat)">3</div>
+      <div><div class="cd-date">Terça · 17/06</div><div class="cd-title">🔢 Matemática — Revisão Geral</div><div class="cd-desc">CDU · ordinais · operações · contagens · Cap.8 Quanto custa?</div><span class="cd-badge b-mat">Prova em 6 dias</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('mat')">
+      <div class="cd-num" style="color:var(--mat)">4</div>
+      <div><div class="cd-date">Quarta · 18/06</div><div class="cd-title">🔢 Matemática — Reforço + Simulado</div><div class="cd-desc">Dinheiro · troco · cédulas e moedas · problemas de compra</div><span class="cd-badge b-mat">Prova em 5 dias</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('his')">
+      <div class="cd-num" style="color:var(--his)">5</div>
+      <div><div class="cd-date">Quinta · 19/06</div><div class="cd-title">🏛️ História — Revisão + Simulado</div><div class="cd-desc">Histórias de famílias · árvore genealógica · histórias de escolas</div><span class="cd-badge b-his">Prova em 5 dias</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('cie')">
+      <div class="cd-num" style="color:var(--cie)">6</div>
+      <div><div class="cd-date">Sexta · 20/06</div><div class="cd-title">🔬 Ciências — Revisão + Simulado</div><div class="cd-desc">Ninguém vive sozinho · diversidade de materiais · propriedades</div><span class="cd-badge b-cie">Prova em 5 dias</span></div>
+    </div>
+    <div class="crono-day pausa">
+      <div class="cd-num">☀️</div>
+      <div><div class="cd-date">Sábado · 21/06</div><div class="cd-title">Pausa — Descanso!</div><div class="cd-desc">Nada de estudos. Brincar, descansar e renovar as energias!</div><span class="cd-badge b-pausa">Descanso merecido!</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('lp')">
+      <div class="cd-num" style="color:var(--lp)">7</div>
+      <div><div class="cd-date">Domingo · 22/06</div><div class="cd-title">📖 Português — Revisão Leve</div><div class="cd-desc">F/V · P/B · GU/QU · sílaba · frase · revisão geral antes das provas</div><span class="cd-badge b-lp">Véspera das provas</span><span class="cd-badge b-prova" style="margin-left:5px">🌍 Prova Geo hoje!</span></div>
+    </div>
+    <div class="crono-day prova-day" style="border-color:var(--geo-m);background:var(--geo-l)">
+      <div class="cd-num" style="color:var(--geo)">🌍</div>
+      <div><div class="cd-date">Segunda · 23/06</div><div class="cd-title" style="color:var(--geo)">PROVA de Geografia</div><div class="cd-desc">Un.4 Lugar para morar · Un.5 Meus caminhos · Revisão rápida de Matemática</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-mat" style="margin-left:5px">Revisar Matemática</span></div>
+    </div>
+    <div class="crono-day prova-day" style="border-color:var(--mat-m);background:var(--mat-l)">
+      <div class="cd-num" style="color:var(--mat)">🔢</div>
+      <div><div class="cd-date">Terça · 24/06</div><div class="cd-title" style="color:var(--mat)">PROVA de Matemática</div><div class="cd-desc">L1: Cap.1+4 · L2: Cap.6+7+8 · Revisar História</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-his" style="margin-left:5px">Revisar História</span></div>
+    </div>
+    <div class="crono-day prova-day" style="border-color:var(--his-m);background:var(--his-l)">
+      <div class="cd-num" style="color:var(--his)">🏛️</div>
+      <div><div class="cd-date">Quarta · 25/06</div><div class="cd-title" style="color:var(--his)">PROVA de História</div><div class="cd-desc">Un.3+4+5 Histórias de famílias e escolas · Revisar Ciências</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-cie" style="margin-left:5px">Revisar Ciências</span></div>
+    </div>
+    <div class="crono-day prova-day" style="border-color:var(--cie-m);background:var(--cie-l)">
+      <div class="cd-num" style="color:var(--cie)">🔬</div>
+      <div><div class="cd-date">Quinta · 26/06</div><div class="cd-title" style="color:var(--cie)">PROVA de Ciências</div><div class="cd-desc">L1:Cap.5 · L2:Cap.6+7 · Revisão leve de Português</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-lp" style="margin-left:5px">Revisar Português</span></div>
+    </div>
+    <div class="crono-day prova-day" style="border-color:var(--lp-m);background:var(--lp-l)">
+      <div class="cd-num" style="color:var(--lp)">📖</div>
+      <div><div class="cd-date">Sexta · 27/06</div><div class="cd-title" style="color:var(--lp)">PROVA de Português</div><div class="cd-desc">F/V · P/B · GU/QU · C/QU · H · CH/LH/NH · Sílaba · Frase · Gêneros</div><span class="cd-badge b-prova">📝 Última prova!</span></div>
+    </div>
+  </div>
+
+  <div class="stitle">📚 Ir para uma matéria</div>
+  <div class="subj-grid">
+    <div class="sc geo" onclick="goPage('geo')"><span class="sc-ico">🌍</span><div class="sc-name">Geografia</div><div class="sc-date">Prova 22/06 (seg)</div></div>
+    <div class="sc mat" onclick="goPage('mat')"><span class="sc-ico">🔢</span><div class="sc-name">Matemática</div><div class="sc-date">Prova 23/06 (ter)</div></div>
+    <div class="sc his" onclick="goPage('his')"><span class="sc-ico">🏛️</span><div class="sc-name">História</div><div class="sc-date">Prova 24/06 (qua)</div></div>
+    <div class="sc cie" onclick="goPage('cie')"><span class="sc-ico">🔬</span><div class="sc-name">Ciências</div><div class="sc-date">Prova 25/06 (qui)</div></div>
+    <div class="sc lp"  onclick="goPage('lp')"><span class="sc-ico">📖</span><div class="sc-name">Português</div><div class="sc-date">Prova 26/06 (sex)</div></div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ══ GEOGRAFIA ══ -->
+<div class="page" id="page-geo">
+  <div class="stitle">🌍 Geografia <span class="stag">Prova: Segunda 22/06 · Faça FTD</span></div>
+    <div class="subj-hero sh-geo"><div class="sh-inner">
+    <div class="sh-eyebrow">📅 Prova: Segunda · 23/06 · Coleção Faça FTD</div>
+    <div class="sh-title">🌍 Geografia</div>
+    <div class="sh-sub">Un.4 — Lugar para morar · Un.5 — Meus caminhos</div>
+    <div class="sh-stats"><div><div class="sh-stat-num">30</div><div class="sh-stat-lbl">Questões</div></div><div><div class="sh-stat-num">5</div><div class="sh-stat-lbl">Flashcards</div></div><div><div class="sh-stat-num">2</div><div class="sh-stat-lbl">Simulados</div></div></div>
+    <div class="sh-tags"><span class="sh-tag">🏠 Moradias</span><span class="sh-tag">🗺️ Pontos de referência</span><span class="sh-tag">🚦 Segurança</span><span class="sh-tag">📐 Planta e maquete</span></div>
+  </div></div>
+  
+  <div class="journey geo" id="journey-geo">
+    <button class="journey-reset" onclick="resetJourney('geo')">↺ zerar</button>
+    <div class="journey-top">
+      <div class="journey-medal" id="jmedal-geo">🥚</div>
+      <div class="journey-info">
+        <div class="journey-level" id="jlevel-geo">Aprendiz</div>
+        <div class="journey-stars">⭐ <b id="jpts-geo">0</b> estrelas</div>
+      </div>
+    </div>
+    <div class="journey-bar-wrap"><div class="journey-bar" id="jbar-geo" style="width:0%"></div></div>
+    <div class="journey-next" id="jnext-geo">Responda os treinos para ganhar estrelas!</div>
+    <div class="journey-badges" id="jbadges-geo">
+      <div class="jbadge locked" title="Aprendiz">🌱</div>
+      <div class="jbadge locked" title="Explorador">🧭</div>
+      <div class="jbadge locked" title="Aventureiro">⚔️</div>
+      <div class="jbadge locked" title="Mestre">🎓</div>
+      <div class="jbadge locked" title="Campeão">👑</div>
+    </div>
+  </div>
+  <div class="info-box" style="border-color:var(--geo-m)">
+    <h4 style="color:#00897b">📚 Conteúdos — Un.4 e Un.5</h4>
+    <div class="ig">
+      <div class="irow"><span class="ic">🏠</span><span><strong>Unidade 4 — Lugar para morar:</strong> tipos de moradia (casa, apartamento, sítio), características dos lugares onde vivemos</span></div>
+      <div class="irow"><span class="ic">🗺️</span><span><strong>Unidade 5 — Meus caminhos:</strong> ponto de referência, como descrever um caminho, pontos de referência naturais e construídos</span></div>
+      <div class="irow"><span class="ic">🚦</span><span><strong>Cuidados no caminho:</strong> regras de segurança, faixa de pedestres, equipamentos de proteção (capacete na bicicleta)</span></div>
+      <div class="irow"><span class="ic">👁️</span><span><strong>Pontos de vista:</strong> visão de frente, de cima e de lado, de cima para baixo · planta e maquete</span></div>
+    </div>
+    <div class="dica"><span>💡</span><span>Exercício da escola: o cogumelo de bolinhas vermelhas atravessou <strong>fora da faixa</strong> — deveria atravessar na faixa de pedestres.</span></div>
+  </div>
+
+  <div class="stitle" style="font-size:1.05rem">🃏 Flashcards — Geografia</div>
+  <div class="fc-hint-bar">👆 Clique · Pense · Vire para ver a resposta</div>
+  <div class="fc-grid">
+    <div class="fc-wrap geo-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">O que é um PONTO DE REFERÊNCIA? Dê exemplos de pontos naturais e construídos.</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">É um elemento que ajuda a <strong>localizar um caminho ou lugar</strong>.<div class="fc-eg"><b>Natural:</b> rio, morro, árvore grande<br><b>Construído:</b> escola, ponte, posto de gasolina, praça</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap geo-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Qual a diferença entre PLANTA e MAQUETE para representar um lugar?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg"><b>Maquete:</b> representa em tamanho menor — é em 3D (tem altura)<br><b>Planta:</b> vista de cima para baixo, em 2D — tem legenda com símbolos</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap geo-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Quais são os 3 tipos de ponto de vista para observar um lugar? O que representa cada um?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg"><b>De frente:</b> vemos a fachada<br><b>De cima e de lado:</b> vemos inclinado (perspectiva)<br><b>De cima para baixo:</b> visão aérea, como na planta</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap geo-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Quais são as regras de segurança no caminho que a escola trabalhou?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg">✅ Atravessar na <b>faixa de pedestres</b><br>✅ Usar <b>capacete</b> na bicicleta<br>✅ Respeitar o <b>semáforo</b><br>❌ Não atravessar fora da faixa</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap geo-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Como descrever um caminho usando pontos de referência? Exemplo prático.</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Use pontos de referência como guia!<div class="fc-eg">Ex: "Saio de casa, viro à direita na escola, passo pela padaria e chego no parque."<br><br>Os pontos de referência <b>facilitam a localização</b> para quem não conhece o caminho.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 1 <span class="stag">Caminhos e referências</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🗺️</span><div><div class="qblock-htitle" style="color:#00897b">Caminhos e Pontos de Referência</div><div class="qblock-hsub">Mario, Luigi, cogumelos e segurança no trânsito</div></div></div>
+    <div id="qz-geo1" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 2 <span class="stag">Moradias e mapas</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🏠</span><div><div class="qblock-htitle" style="color:#00897b">Tipos de Moradia · Planta · Maquete</div><div class="qblock-hsub">Palafita, enxaimel, taipa e representações do espaço</div></div></div>
+    <div id="qz-geo2" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 3 <span class="stag">Desafio</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🧩</span><div><div class="qblock-htitle" style="color:#00897b">Questões de Interpretação</div><div class="qblock-hsub">Raciocínio aplicado — nível próximo à prova</div></div></div>
+    <div id="qz-geo3" class="qz-wrap"></div>
+  </div>
+
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📝 Simulado — Geografia</div>
+  <div class="sim-block geo">
+    <div class="sim-head"><span class="sim-head-ico">🌍</span><div><div class="sim-head-title">Simulado — Geografia</div><div class="sim-head-sub">10 questões · Un.4 e Un.5 · estilo prova</div></div></div>
+    <div class="sim-body"><div id="qz-sim-geo" class="qz-wrap"></div></div>
+      <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">⚡ Desafio Relâmpago <span class="stag">Contra o tempo!</span></div>
+  <div class="relampago geo" id="rel-geo">
+    <div class="rel-head"><span class="rel-ico">⚡</span><div><div class="rel-title">Desafio Relâmpago</div><div class="rel-sub">10 segundos por pergunta · acerte o máximo que conseguir!</div></div></div>
+    <div class="rel-body" id="relbody-geo">
+      <button class="rel-start" onclick="startRelampago('geo','qz-geo3')">▶️ Começar desafio!</button>
+      <div class="rel-record">🏅 Seu recorde: <b id="relrec-geo">0</b> acertos seguidos</div>
+    </div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">🚀 Vai Além <span class="stag">Para mentes curiosas</span></div>
+    <div class="beyond geo">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">E se a sua cidade não tivesse nenhum ponto de referência — nem placas, nem nomes de ruas. Como as pessoas se encontrariam?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-geo-0',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-geo-0">Pense em como os marinheiros antigos se guiavam pelas <b>estrelas</b>, ou como animais acham o caminho de casa pelo <b>cheiro</b>. Talvez usássemos montanhas, rios, o sol nascendo... Pontos de referência naturais existem antes mesmo das cidades!<span class="nudge">🤔 Que ponto de referência VOCÊ usaria para explicar onde fica a sua casa?</span></div>
+    </div>
+    <div class="beyond geo">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Por que será que algumas casas são feitas sobre estacas na água (palafitas) e outras de barro e palha (taipa)?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-geo-1',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-geo-1">As pessoas constroem com o que a <b>natureza oferece ali perto</b> e para se proteger do clima. Quem mora perto de rios que enchem precisa ficar acima da água. Quem mora onde tem muito barro e madeira, usa esses materiais.<span class="nudge">🤔 Se você fosse construir uma casa numa floresta, com o que faria?</span></div>
+    </div>
+    <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📔 Glossário Ilustrado <span class="stag">Palavras-chave</span></div>
+  <div class="gloss-grid">
+    <div class="gloss-card geo"><div class="gloss-top"><span class="gloss-emo">🗺️</span><span class="gloss-word">Ponto de referência</span></div><div class="gloss-def">Lugar fácil de reconhecer que ajuda a achar caminhos (escola, rio, ponte).</div></div>
+    <div class="gloss-card geo"><div class="gloss-top"><span class="gloss-emo">📐</span><span class="gloss-word">Planta</span></div><div class="gloss-def">Desenho de um lugar visto <b>de cima para baixo</b>, com legenda.</div></div>
+    <div class="gloss-card geo"><div class="gloss-top"><span class="gloss-emo">🏘️</span><span class="gloss-word">Maquete</span></div><div class="gloss-def">Modelo de um lugar em <b>tamanho menor</b> e em 3D (dá para pegar).</div></div>
+    <div class="gloss-card geo"><div class="gloss-top"><span class="gloss-emo">🏠</span><span class="gloss-word">Palafita</span></div><div class="gloss-def">Casa construída <b>sobre estacas</b>, acima da água.</div></div>
+    <div class="gloss-card geo"><div class="gloss-top"><span class="gloss-emo">🚦</span><span class="gloss-word">Faixa de pedestres</span></div><div class="gloss-def">Listras na rua onde é <b>seguro atravessar</b>.</div></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✅ Resumo antes da Prova <span class="stag">Checklist final</span></div>
+  <div class="resumo geo">
+    <div class="resumo-head"><span class="resumo-ico">🎯</span><div class="resumo-title">Eu já sei...</div></div>
+    <ul class="resumo-list">
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei a diferença entre ponto de referência <b>natural</b> (rio) e <b>construído</b> (escola).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei que a <b>planta</b> é vista de cima e a <b>maquete</b> é menor e em 3D.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Conheço os tipos de moradia: <b>palafita</b>, <b>enxaimel</b> e <b>taipa</b>.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Lembro das regras de <b>segurança no trânsito</b> (faixa, capacete, semáforo).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei descrever um <b>caminho</b> usando pontos de referência.</span></li>
+    </ul>
+  </div>
+</div>
+</div><!-- /geo -->
+
+<!-- ══ MATEMÁTICA ══ -->
+<div class="page" id="page-mat">
+  <div class="stitle">🔢 Matemática <span class="stag">Prova: Terça 23/06 · Lendo o Mundo SAS</span></div>
+    <div class="subj-hero sh-mat"><div class="sh-inner">
+    <div class="sh-eyebrow">📅 Prova: Terça · 24/06 · Lendo o Mundo SAS</div>
+    <div class="sh-title">🔢 Matemática</div>
+    <div class="sh-sub">L1: Cap.1+4 · L2: Cap.6+7+8 · Caderno e folhas avulsas</div>
+    <div class="sh-stats"><div><div class="sh-stat-num">30</div><div class="sh-stat-lbl">Questões</div></div><div><div class="sh-stat-num">5</div><div class="sh-stat-lbl">Flashcards</div></div><div><div class="sh-stat-num">2</div><div class="sh-stat-lbl">Simulados</div></div></div>
+    <div class="sh-tags"><span class="sh-tag">📦 CDU</span><span class="sh-tag">🏅 Ordinais</span><span class="sh-tag">↔️ Suc/Ant</span><span class="sh-tag">💰 Quanto custa?</span></div>
+  </div></div>
+  
+  <div class="journey mat" id="journey-mat">
+    <button class="journey-reset" onclick="resetJourney('mat')">↺ zerar</button>
+    <div class="journey-top">
+      <div class="journey-medal" id="jmedal-mat">🥚</div>
+      <div class="journey-info">
+        <div class="journey-level" id="jlevel-mat">Aprendiz</div>
+        <div class="journey-stars">⭐ <b id="jpts-mat">0</b> estrelas</div>
+      </div>
+    </div>
+    <div class="journey-bar-wrap"><div class="journey-bar" id="jbar-mat" style="width:0%"></div></div>
+    <div class="journey-next" id="jnext-mat">Responda os treinos para ganhar estrelas!</div>
+    <div class="journey-badges" id="jbadges-mat">
+      <div class="jbadge locked" title="Aprendiz">🌱</div>
+      <div class="jbadge locked" title="Explorador">🧭</div>
+      <div class="jbadge locked" title="Aventureiro">⚔️</div>
+      <div class="jbadge locked" title="Mestre">🎓</div>
+      <div class="jbadge locked" title="Campeão">👑</div>
+    </div>
+  </div>
+  <div class="info-box" style="border-color:var(--mat-m)">
+    <h4 style="color:#1e62c4">📚 Conteúdos</h4>
+    <div class="ig">
+      <div class="irow"><span class="ic">📘</span><span><strong>L1 Cap.1 — Números por todo lado:</strong> sucessor, antecessor, comparação, ordem</span></div>
+      <div class="irow"><span class="ic">📘</span><span><strong>L1 Cap.4 — Na medida certa:</strong> calendário, dias da semana</span></div>
+      <div class="irow"><span class="ic">📗</span><span><strong>L2 Cap.6 — Os números e o que valem:</strong> CDU, extenso, ordinais</span></div>
+      <div class="irow"><span class="ic">📗</span><span><strong>L2 Cap.7 — Contagens e agrupamentos:</strong> de 10 em 10, base 10</span></div>
+      <div class="irow"><span class="ic">💰</span><span><strong>L2 Cap.8 — Quanto custa?:</strong> cédulas e moedas, troco, soma de valores</span></div>
+    </div>
+    <div class="dica"><span>💡</span><span>Exercícios reais: Pedro=R$30 · Lucas=R$43 (4 notas de R$10 + 1 de R$2 + 1 moeda de R$1) · Família de Mariana gastou R$90 na excursão.</span></div>
+  </div>
+
+  <div class="stitle" style="font-size:1.05rem">🃏 Flashcards — Matemática</div>
+  <div class="fc-hint-bar">👆 Clique · Pense · Vire para ver a resposta</div>
+  <div class="fc-grid">
+    <div class="fc-wrap mat-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">O que são cédulas e moedas? Quais são os valores do dinheiro brasileiro?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><strong>Cédulas</strong> (notas de papel) e <strong>moedas</strong> (metal)<div class="fc-eg"><b>Cédulas:</b> R$2 · R$5 · R$10 · R$20 · R$50 · R$100<br><b>Moedas:</b> R$0,05 · R$0,10 · R$0,25 · R$0,50 · R$1,00</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap mat-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Como calcular o TROCO? Se pago R$10 numa compra de R$7, quanto recebo de troco?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Troco = valor pago − valor da compra<div class="fc-eg">R$10 − R$7 = <b>R$3 de troco</b><br><br>Exercício da escola: mãe de Fernando pagou R$10 por suco de R$7 → <b>troco = R$3</b></div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap mat-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Como somar o valor de várias cédulas? Família de Mariana: 2×R$20 + 5×R$10. Total?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Some o valor de cada cédula:<div class="fc-eg">20+20+10+10+10+10+10 = <b>R$90</b><br><br>Família gastou R$90 na excursão ao Jardim Botânico!</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap mat-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Qual é o SUCESSOR de 299 e o ANTECESSOR de 500? E como escrever 312 por extenso?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg">suc(299) = <b>300</b> · ant(500) = <b>499</b><br><br><b>312</b> = trezentos e doze<br><b>208</b> = duzentos e oito<br><b>157</b> = cento e cinquenta e sete</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap mat-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Lucas tem R$43 em notas de R$10, R$2 e moeda de R$1. Quantas ele tem de cada?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Do exercício da escola:<div class="fc-eg"><b>4</b> notas de R$10 = R$40<br><b>1</b> nota de R$2 = R$2<br><b>1</b> moeda de R$1 = R$1<br>Total: R$40+R$2+R$1 = <b>R$43 ✅</b></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 1 <span class="stag">Dinheiro e troco</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">💰</span><div><div class="qblock-htitle" style="color:#1e62c4">Cap.8 — Quanto custa?</div><div class="qblock-hsub">Cédulas, moedas, troco e problemas de compra</div></div></div>
+    <div id="qz-mat1" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 2 <span class="stag">Números</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🔢</span><div><div class="qblock-htitle" style="color:#1e62c4">CDU · Extenso · Ordinais · Operações</div><div class="qblock-hsub">Caps. 1, 4, 6 e 7 — números e o que eles valem</div></div></div>
+    <div id="qz-mat2" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 3 <span class="stag">Desafio</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🧩</span><div><div class="qblock-htitle" style="color:#1e62c4">Problemas com raciocínio</div><div class="qblock-hsub">Questões que pedem mais atenção e interpretação</div></div></div>
+    <div id="qz-mat3" class="qz-wrap"></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📝 Simulado — Matemática</div>
+  <div class="sim-block mat">
+    <div class="sim-head"><span class="sim-head-ico">🔢</span><div><div class="sim-head-title">Simulado — Matemática</div><div class="sim-head-sub">10 questões · estilo prova da escola</div></div></div>
+    <div class="sim-body"><div id="qz-sim-mat" class="qz-wrap"></div></div>
+      <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">⚡ Desafio Relâmpago <span class="stag">Contra o tempo!</span></div>
+  <div class="relampago mat" id="rel-mat">
+    <div class="rel-head"><span class="rel-ico">⚡</span><div><div class="rel-title">Desafio Relâmpago</div><div class="rel-sub">10 segundos por pergunta · acerte o máximo que conseguir!</div></div></div>
+    <div class="rel-body" id="relbody-mat">
+      <button class="rel-start" onclick="startRelampago('mat','qz-mat3')">▶️ Começar desafio!</button>
+      <div class="rel-record">🏅 Seu recorde: <b id="relrec-mat">0</b> acertos seguidos</div>
+    </div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">🚀 Vai Além <span class="stag">Para mentes curiosas</span></div>
+    <div class="beyond mat">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Se o dinheiro não existisse, como as pessoas comprariam coisas? Como você pagaria por um sorvete?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-mat-0',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-mat-0">Há muito tempo, as pessoas faziam <b>troca</b> (chamada escambo): eu te dou 2 galinhas, você me dá 1 saco de milho. O dinheiro foi inventado para facilitar — é mais fácil carregar moedas do que galinhas!<span class="nudge">🤔 Que problema apareceria se duas pessoas não concordassem no valor da troca?</span></div>
+    </div>
+    <div class="beyond mat">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Por que será que usamos grupos de 10 para contar (10, 20, 100...) e não grupos de 7 ou de 5?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-mat-1',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-mat-1">Olhe para as suas <b>mãos</b>: temos 10 dedos! Por isso a humanidade inteira foi contando de 10 em 10. Se tivéssemos 8 dedos, talvez contássemos de 8 em 8!<span class="nudge">🤔 Como você contaria se só pudesse usar os dedos de uma mão?</span></div>
+    </div>
+    <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📔 Glossário Ilustrado <span class="stag">Palavras-chave</span></div>
+  <div class="gloss-grid">
+    <div class="gloss-card mat"><div class="gloss-top"><span class="gloss-emo">💰</span><span class="gloss-word">Cédula</span></div><div class="gloss-def">Dinheiro de <b>papel</b> (R$2, R$5, R$10, R$20, R$50, R$100).</div></div>
+    <div class="gloss-card mat"><div class="gloss-top"><span class="gloss-emo">🪙</span><span class="gloss-word">Moeda</span></div><div class="gloss-def">Dinheiro de <b>metal</b> (R$0,05 até R$1,00).</div></div>
+    <div class="gloss-card mat"><div class="gloss-top"><span class="gloss-emo">🔄</span><span class="gloss-word">Troco</span></div><div class="gloss-def">O dinheiro que <b>sobra e volta</b> quando você paga a mais.</div></div>
+    <div class="gloss-card mat"><div class="gloss-top"><span class="gloss-emo">🔢</span><span class="gloss-word">CDU</span></div><div class="gloss-def">Centena, Dezena e Unidade — o <b>lugar de cada número</b>.</div></div>
+    <div class="gloss-card mat"><div class="gloss-top"><span class="gloss-emo">🏅</span><span class="gloss-word">Ordinal</span></div><div class="gloss-def">Número de <b>ordem</b>: 1º, 2º, 3º (primeiro, segundo...).</div></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✅ Resumo antes da Prova <span class="stag">Checklist final</span></div>
+  <div class="resumo mat">
+    <div class="resumo-head"><span class="resumo-ico">🎯</span><div class="resumo-title">Eu já sei...</div></div>
+    <ul class="resumo-list">
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei calcular o <b>troco</b> (valor pago menos o preço).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Reconheço <b>cédulas e moedas</b> e sei somar valores.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei escrever números <b>por extenso</b> (312 = trezentos e doze).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei achar o <b>sucessor</b> (+1) e o <b>antecessor</b> (−1).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei contar de <b>10 em 10</b> e agrupar em centenas, dezenas e unidades.</span></li>
+    </ul>
+  </div>
+</div>
+</div><!-- /mat -->
+
+<!-- ══ HISTÓRIA ══ -->
+<div class="page" id="page-his">
+  <div class="stitle">🏛️ História <span class="stag">Prova: Quarta 24/06 · Faça FTD</span></div>
+    <div class="subj-hero sh-his"><div class="sh-inner">
+    <div class="sh-eyebrow">📅 Prova: Quarta · 25/06 · Coleção Faça FTD</div>
+    <div class="sh-title">🏛️ História</div>
+    <div class="sh-sub">Un.3 Famílias · Un.4 A história da sua família · Un.5 Escolas</div>
+    <div class="sh-stats"><div><div class="sh-stat-num">30</div><div class="sh-stat-lbl">Questões</div></div><div><div class="sh-stat-num">4</div><div class="sh-stat-lbl">Flashcards</div></div><div><div class="sh-stat-num">2</div><div class="sh-stat-lbl">Simulados</div></div></div>
+    <div class="sh-tags"><span class="sh-tag">👨‍👩‍👧 Famílias</span><span class="sh-tag">🌳 Árvore genealógica</span><span class="sh-tag">🎁 Tradições</span><span class="sh-tag">🛶 Escola ribeirinha</span></div>
+  </div></div>
+  
+  <div class="journey his" id="journey-his">
+    <button class="journey-reset" onclick="resetJourney('his')">↺ zerar</button>
+    <div class="journey-top">
+      <div class="journey-medal" id="jmedal-his">🥚</div>
+      <div class="journey-info">
+        <div class="journey-level" id="jlevel-his">Aprendiz</div>
+        <div class="journey-stars">⭐ <b id="jpts-his">0</b> estrelas</div>
+      </div>
+    </div>
+    <div class="journey-bar-wrap"><div class="journey-bar" id="jbar-his" style="width:0%"></div></div>
+    <div class="journey-next" id="jnext-his">Responda os treinos para ganhar estrelas!</div>
+    <div class="journey-badges" id="jbadges-his">
+      <div class="jbadge locked" title="Aprendiz">🌱</div>
+      <div class="jbadge locked" title="Explorador">🧭</div>
+      <div class="jbadge locked" title="Aventureiro">⚔️</div>
+      <div class="jbadge locked" title="Mestre">🎓</div>
+      <div class="jbadge locked" title="Campeão">👑</div>
+    </div>
+  </div>
+  <div class="info-box" style="border-color:var(--his-m)">
+    <h4 style="color:#c0392b">📚 Conteúdos — Un.3, 4 e 5</h4>
+    <div class="ig">
+      <div class="irow"><span class="ic">👨‍👩‍👧</span><span><strong>Un.3 — Histórias de famílias:</strong> tipos de família, graus de parentesco, árvore genealógica</span></div>
+      <div class="irow"><span class="ic">📜</span><span><strong>Un.4 — A história da sua família:</strong> memórias, tradições, objetos antigos x modernos</span></div>
+      <div class="irow"><span class="ic">🏫</span><span><strong>Un.5 — Histórias de escolas:</strong> diferentes tipos de escola, escola ribeirinha, direitos e deveres</span></div>
+    </div>
+    <div class="dica"><span>💡</span><span>Gabarito escola: Joca é filho do tio da Bia = <strong>primo</strong>. Gustavo é irmão da mãe = <strong>tio</strong>. A escola ribeirinha fica <strong>na margem de um rio</strong> — os alunos chegam de barco!</span></div>
+  </div>
+
+  <div class="stitle" style="font-size:1.05rem">🃏 Flashcards — História</div>
+  <div class="fc-hint-bar">👆 Clique · Pense · Vire para ver a resposta</div>
+  <div class="fc-grid">
+    <div class="fc-wrap his-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">O que é árvore genealógica e para que serve?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">É um <strong>diagrama que mostra as pessoas da família</strong> e como elas são ligadas umas às outras.<div class="fc-eg">Mostra: avós, pais, tios, primos, irmãos<br>Ajuda a entender a <b>história da família</b></div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap his-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Quais são os graus de parentesco? O filho do meu tio é meu...?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg">pai/mãe → irmão/irmã → avô/avó<br>tio/tia → <b>primo/prima</b><br><br>O filho do tio = <b>primo</b><br>O irmão da mãe = <b>tio</b><br>O pai da mamãe = <b>avô materno</b></div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap his-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">O que é uma escola ribeirinha? Como os alunos chegam até ela?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Escola localizada <strong>na margem de um rio</strong>.<div class="fc-eg">Os alunos chegam de <b>barco ou canoa</b>!<br>Entre agosto e outubro o rio fica com as <b>águas baixas</b>, dificultando a viagem.</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap his-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">O que são tradições de família? Dê exemplos de memórias e objetos antigos.</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Tradições são <strong>costumes passados de geração em geração</strong>.<div class="fc-eg">Exemplos: receitas da vovó, festas juninas, músicas, fotos antigas, cartas, roupas<br><br>Objetos antigos: <b>relógio com campainha → despertador digital</b></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 1 <span class="stag">Família e parentesco</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🌳</span><div><div class="qblock-htitle" style="color:#c0392b">Árvore Genealógica e Parentesco</div><div class="qblock-hsub">Com Mariana, Bia, Joca e a família da escola</div></div></div>
+    <div id="qz-his1" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 2 <span class="stag">Escolas e tradições</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🛶</span><div><div class="qblock-htitle" style="color:#c0392b">Escola Ribeirinha · Tradições · Objetos</div><div class="qblock-hsub">Un.4 e Un.5 — histórias de famílias e escolas</div></div></div>
+    <div id="qz-his2" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 3 <span class="stag">Desafio</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🧩</span><div><div class="qblock-htitle" style="color:#c0392b">Questões de interpretação e raciocínio</div><div class="qblock-hsub">Nível próximo à prova — leia com atenção!</div></div></div>
+    <div id="qz-his3" class="qz-wrap"></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📝 Simulado — História</div>
+  <div class="sim-block his">
+    <div class="sim-head"><span class="sim-head-ico">🏛️</span><div><div class="sim-head-title">Simulado — História</div><div class="sim-head-sub">10 questões · estilo prova da escola</div></div></div>
+    <div class="sim-body"><div id="qz-sim-his" class="qz-wrap"></div></div>
+      <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">⚡ Desafio Relâmpago <span class="stag">Contra o tempo!</span></div>
+  <div class="relampago his" id="rel-his">
+    <div class="rel-head"><span class="rel-ico">⚡</span><div><div class="rel-title">Desafio Relâmpago</div><div class="rel-sub">10 segundos por pergunta · acerte o máximo que conseguir!</div></div></div>
+    <div class="rel-body" id="relbody-his">
+      <button class="rel-start" onclick="startRelampago('his','qz-his3')">▶️ Começar desafio!</button>
+      <div class="rel-record">🏅 Seu recorde: <b id="relrec-his">0</b> acertos seguidos</div>
+    </div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">🚀 Vai Além <span class="stag">Para mentes curiosas</span></div>
+    <div class="beyond his">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Como será que os seus bisavós estudavam, numa época sem computador, sem internet e às vezes sem luz elétrica?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-his-0',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-his-0">Eles usavam <b>lousa e giz</b>, escreviam à luz de lampião, e muitos andavam horas a pé até a escola. Algumas tradições continuam — o caderno e o lápis ainda existem hoje!<span class="nudge">🤔 Que objeto que você usa hoje você acha que vai virar 'coisa antiga' quando você crescer?</span></div>
+    </div>
+    <div class="beyond his">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Por que será que as famílias guardam fotos, cartas e objetos antigos dos avós e bisavós?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-his-1',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-his-1">Esses objetos contam a <b>história da família</b> — são como um tesouro de memórias. Uma foto antiga mostra como as pessoas viviam, se vestiam e o que era importante para elas.<span class="nudge">🤔 Qual objeto da sua família você guardaria para mostrar aos seus netos um dia?</span></div>
+    </div>
+    <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📔 Glossário Ilustrado <span class="stag">Palavras-chave</span></div>
+  <div class="gloss-grid">
+    <div class="gloss-card his"><div class="gloss-top"><span class="gloss-emo">🌳</span><span class="gloss-word">Árvore genealógica</span></div><div class="gloss-def">Desenho que mostra <b>toda a família</b> e como se ligam.</div></div>
+    <div class="gloss-card his"><div class="gloss-top"><span class="gloss-emo">👨‍👧</span><span class="gloss-word">Primo</span></div><div class="gloss-def">Filho do seu <b>tio ou tia</b>.</div></div>
+    <div class="gloss-card his"><div class="gloss-top"><span class="gloss-emo">🎁</span><span class="gloss-word">Tradição</span></div><div class="gloss-def">Costume <b>passado de pais para filhos</b> ao longo do tempo.</div></div>
+    <div class="gloss-card his"><div class="gloss-top"><span class="gloss-emo">🛶</span><span class="gloss-word">Escola ribeirinha</span></div><div class="gloss-def">Escola na <b>margem do rio</b>; alunos chegam de barco.</div></div>
+    <div class="gloss-card his"><div class="gloss-top"><span class="gloss-emo">📻</span><span class="gloss-word">Objeto antigo</span></div><div class="gloss-def">Coisa do passado que mudou (rádio de madeira → celular).</div></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✅ Resumo antes da Prova <span class="stag">Checklist final</span></div>
+  <div class="resumo his">
+    <div class="resumo-head"><span class="resumo-ico">🎯</span><div class="resumo-title">Eu já sei...</div></div>
+    <ul class="resumo-list">
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei montar uma <b>árvore genealógica</b> e os graus de parentesco.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei que primo é <b>filho do tio</b> e tio é <b>irmão do pai/mãe</b>.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Conheço a <b>escola ribeirinha</b> (margem do rio, chega de barco).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei o que são <b>tradições</b> de família.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei comparar <b>objetos antigos e modernos</b> (rádio → celular).</span></li>
+    </ul>
+  </div>
+</div>
+</div><!-- /his -->
+
+<!-- ══ CIÊNCIAS ══ -->
+<div class="page" id="page-cie">
+  <div class="stitle">🔬 Ciências <span class="stag">Prova: Quinta 25/06 · Lendo o Mundo SAS</span></div>
+    <div class="subj-hero sh-cie"><div class="sh-inner">
+    <div class="sh-eyebrow">📅 Prova: Quinta · 26/06 · Lendo o Mundo SAS</div>
+    <div class="sh-title">🔬 Ciências</div>
+    <div class="sh-sub">L1 Cap.5 Ninguém vive sozinho · L2 Cap.6 Materiais · Cap.7 Propriedades</div>
+    <div class="sh-stats"><div><div class="sh-stat-num">30</div><div class="sh-stat-lbl">Questões</div></div><div><div class="sh-stat-num">5</div><div class="sh-stat-lbl">Flashcards</div></div><div><div class="sh-stat-num">2</div><div class="sh-stat-lbl">Simulados</div></div></div>
+    <div class="sh-tags"><span class="sh-tag">🤝 Seres vivos</span><span class="sh-tag">🪵 Materiais</span><span class="sh-tag">⚙️ Propriedades</span><span class="sh-tag">♻️ Reciclagem</span></div>
+  </div></div>
+  
+  <div class="journey cie" id="journey-cie">
+    <button class="journey-reset" onclick="resetJourney('cie')">↺ zerar</button>
+    <div class="journey-top">
+      <div class="journey-medal" id="jmedal-cie">🥚</div>
+      <div class="journey-info">
+        <div class="journey-level" id="jlevel-cie">Aprendiz</div>
+        <div class="journey-stars">⭐ <b id="jpts-cie">0</b> estrelas</div>
+      </div>
+    </div>
+    <div class="journey-bar-wrap"><div class="journey-bar" id="jbar-cie" style="width:0%"></div></div>
+    <div class="journey-next" id="jnext-cie">Responda os treinos para ganhar estrelas!</div>
+    <div class="journey-badges" id="jbadges-cie">
+      <div class="jbadge locked" title="Aprendiz">🌱</div>
+      <div class="jbadge locked" title="Explorador">🧭</div>
+      <div class="jbadge locked" title="Aventureiro">⚔️</div>
+      <div class="jbadge locked" title="Mestre">🎓</div>
+      <div class="jbadge locked" title="Campeão">👑</div>
+    </div>
+  </div>
+  <div class="info-box" style="border-color:var(--cie-m)">
+    <h4 style="color:#065f46">📚 Conteúdos</h4>
+    <div class="ig">
+      <div class="irow"><span class="ic">🤝</span><span><strong>L1 Cap.5 — Ninguém vive sozinho:</strong> relações entre seres vivos, raiz+solo, abelhas+flores, animais+plantas</span></div>
+      <div class="irow"><span class="ic">🪵</span><span><strong>L2 Cap.6 — Diversidade de Materiais:</strong> madeira, algodão, plástico (petróleo), vidro, rocha, metais</span></div>
+      <div class="irow"><span class="ic">⚙️</span><span><strong>L2 Cap.7 — Cada material serve para uma coisa:</strong> propriedades (tenacidade, aparência, elasticidade, textura, permeabilidade, flexibilidade)</span></div>
+    </div>
+    <div class="dica"><span>💡</span><span>Propriedades dos materiais: <b>A</b>=Tenacidade · <b>B</b>=Aparência · <b>C</b>=Elasticidade · <b>D</b>=Textura · <b>E</b>=Permeabilidade · <b>F</b>=Flexibilidade</span></div>
+  </div>
+
+  <div class="stitle" style="font-size:1.05rem">🃏 Flashcards — Ciências</div>
+  <div class="fc-hint-bar">👆 Clique · Pense · Vire para ver a resposta</div>
+  <div class="fc-grid">
+    <div class="fc-wrap cie-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Como as plantas se relacionam com o solo? Qual é a função da raiz?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">A raiz serve para <strong>prender</strong> a planta no solo.<div class="fc-eg">A <b>raiz</b> retira do <b>solo</b> a água e os sais minerais de que as plantas precisam para viver.</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap cie-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Quais são as 6 propriedades dos materiais (A a F) estudadas na escola?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg"><b>A</b> Tenacidade — aguenta impactos<br><b>B</b> Aparência — cor, brilho, transparência<br><b>C</b> Elasticidade — esticar e voltar<br><b>D</b> Textura — liso, áspero, rugoso<br><b>E</b> Permeabilidade — deixa líquido passar<br><b>F</b> Flexibilidade — dobrar facilmente</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap cie-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">De onde vem o plástico? E o vidro? E os metais?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg"><b>Plástico:</b> vem do PETRÓLEO (demora milhões de anos para se formar)<br><b>Vidro:</b> feito a partir da areia — pode ser reciclado!<br><b>Metais:</b> retirados dos MINÉRIOS dentro das rochas</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap cie-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Qual é o caminho do algodão? Da planta até virar roupa.</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Do exercício da escola (ordem 1 a 4):<div class="fc-eg">1. Algodão <b>colhido</b> do algodoeiro<br>2. Transformado em <b>fios e linhas</b><br>3. Linhas em máquinas fazendo <b>tecidos</b><br>4. Tecidos viram <b>roupas</b> coloridas!</div></div></div>
+      </div>
+    </div>
+    <div class="fc-wrap cie-fc" onclick="this.classList.toggle('flipped')">
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Como as abelhas se relacionam com as flores? E os morcegos? E os veados?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+        <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Do exercício da escola:<div class="fc-eg"><b>Abelhas → pólen das flores</b> (polinização)<br><b>Morcegos → frutos e pólen</b><br><b>Araras → troncos de árvores</b> (abrigo)<br><b>Veados → plantas</b> (alimentação)</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 1 <span class="stag">Seres vivos</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🤝</span><div><div class="qblock-htitle" style="color:#065f46">Cap.5 — Ninguém vive sozinho</div><div class="qblock-hsub">Raiz, solo, abelhas, morcegos, araras e veados</div></div></div>
+    <div id="qz-cie1" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 2 <span class="stag">Materiais</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🪵</span><div><div class="qblock-htitle" style="color:#065f46">Cap.6+7 — Materiais e propriedades</div><div class="qblock-hsub">Madeira, algodão, plástico, vidro, metais e as 6 propriedades</div></div></div>
+    <div id="qz-cie2" class="qz-wrap"></div>
+  </div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Nível 3 <span class="stag">Desafio</span></div>
+  <div class="quiz-block">
+    <div class="qblock-hd"><span class="qblock-ico">🧩</span><div><div class="qblock-htitle" style="color:#065f46">Questões de interpretação e aplicação</div><div class="qblock-hsub">Raciocínio aplicado — nível próximo à prova</div></div></div>
+    <div id="qz-cie3" class="qz-wrap"></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📝 Simulado — Ciências</div>
+  <div class="sim-block cie">
+    <div class="sim-head"><span class="sim-head-ico">🔬</span><div><div class="sim-head-title">Simulado — Ciências</div><div class="sim-head-sub">10 questões · estilo prova da escola</div></div></div>
+    <div class="sim-body"><div id="qz-sim-cie" class="qz-wrap"></div></div>
+      <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">⚡ Desafio Relâmpago <span class="stag">Contra o tempo!</span></div>
+  <div class="relampago cie" id="rel-cie">
+    <div class="rel-head"><span class="rel-ico">⚡</span><div><div class="rel-title">Desafio Relâmpago</div><div class="rel-sub">10 segundos por pergunta · acerte o máximo que conseguir!</div></div></div>
+    <div class="rel-body" id="relbody-cie">
+      <button class="rel-start" onclick="startRelampago('cie','qz-cie3')">▶️ Começar desafio!</button>
+      <div class="rel-record">🏅 Seu recorde: <b id="relrec-cie">0</b> acertos seguidos</div>
+    </div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">🚀 Vai Além <span class="stag">Para mentes curiosas</span></div>
+    <div class="beyond cie">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">E se TODAS as abelhas do mundo desaparecessem de repente. O que aconteceria com as plantas, as frutas e os animais?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-cie-0',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-cie-0">Muitas plantas dependem das abelhas para a <b>polinização</b> — sem elas, muitas frutas e flores deixariam de nascer. Menos plantas significa menos comida para os animais... tudo na natureza está ligado!<span class="nudge">🤔 Que outros animais também ajudam as plantas, como vimos nos estudos?</span></div>
+    </div>
+    <div class="beyond cie">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Por que será que o plástico é um problema para o planeta, se ele é tão útil no dia a dia?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-cie-1',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-cie-1">O plástico vem do <b>petróleo</b>, que demora milhões de anos para se formar — e quando jogamos fora, ele demora centenas de anos para sumir. Por isso reciclar e reutilizar é tão importante!<span class="nudge">🤔 Que objeto de plástico da sua casa poderia ser trocado por um de vidro ou de pano?</span></div>
+    </div>
+    <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📔 Glossário Ilustrado <span class="stag">Palavras-chave</span></div>
+  <div class="gloss-grid">
+    <div class="gloss-card cie"><div class="gloss-top"><span class="gloss-emo">🌱</span><span class="gloss-word">Raiz</span></div><div class="gloss-def">Parte que <b>prende a planta</b> no solo e puxa água.</div></div>
+    <div class="gloss-card cie"><div class="gloss-top"><span class="gloss-emo">🐝</span><span class="gloss-word">Polinização</span></div><div class="gloss-def">Quando a abelha leva o <b>pólen de flor em flor</b>.</div></div>
+    <div class="gloss-card cie"><div class="gloss-top"><span class="gloss-emo">🛢️</span><span class="gloss-word">Petróleo</span></div><div class="gloss-def">De onde vem o <b>plástico</b>; leva milhões de anos para formar.</div></div>
+    <div class="gloss-card cie"><div class="gloss-top"><span class="gloss-emo">♻️</span><span class="gloss-word">Reciclar</span></div><div class="gloss-def">Transformar lixo (vidro, metal) em <b>coisas novas</b>.</div></div>
+    <div class="gloss-card cie"><div class="gloss-top"><span class="gloss-emo">⚙️</span><span class="gloss-word">Propriedade</span></div><div class="gloss-def">Característica do material: dureza, textura, flexibilidade...</div></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✅ Resumo antes da Prova <span class="stag">Checklist final</span></div>
+  <div class="resumo cie">
+    <div class="resumo-head"><span class="resumo-ico">🎯</span><div class="resumo-title">Eu já sei...</div></div>
+    <ul class="resumo-list">
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei que a <b>raiz</b> prende a planta e puxa água e sais minerais.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Conheço as relações entre seres vivos (abelhas, morcegos, araras, veados).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei de onde vêm os materiais: <b>plástico</b> (petróleo), <b>vidro</b> (areia), <b>metal</b> (rochas).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei as <b>6 propriedades</b> dos materiais (A a F).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei a ordem do <b>algodão</b> até virar roupa (colheita → fios → tecido → roupa).</span></li>
+    </ul>
+  </div>
+</div>
+</div><!-- /cie -->
+
+<!-- ══ PORTUGUÊS ══ -->
+<div class="page" id="page-lp">
+  <div class="stitle">📖 Português <span class="stag">Prova: Sexta 26/06 · Porta Aberta FTD</span></div>
+    <div class="subj-hero sh-lp"><div class="sh-inner">
+    <div class="sh-eyebrow">📅 Prova: Sexta · 27/06 · Porta Aberta FTD</div>
+    <div class="sh-title">📖 Língua Portuguesa</div>
+    <div class="sh-sub">F/V · P/B · GU/QU (novo!) · C/QU · H · CH/LH/NH · Sílaba · Frase · Gêneros</div>
+    <div class="sh-stats"><div><div class="sh-stat-num">30</div><div class="sh-stat-lbl">Questões</div></div><div><div class="sh-stat-num">6</div><div class="sh-stat-lbl">Flashcards</div></div><div><div class="sh-stat-num">2</div><div class="sh-stat-lbl">Simulados</div></div></div>
+    <div class="sh-tags"><span class="sh-tag">🆕 GU/QU</span><span class="sh-tag">🦊 F/V</span><span class="sh-tag">🐝 P/B</span><span class="sh-tag">✂️ Sílaba</span><span class="sh-tag">🍫 CH·LH·NH</span></div>
+  </div></div>
+  
+  <div class="journey lp" id="journey-lp">
+    <button class="journey-reset" onclick="resetJourney('lp')">↺ zerar</button>
+    <div class="journey-top">
+      <div class="journey-medal" id="jmedal-lp">🥚</div>
+      <div class="journey-info">
+        <div class="journey-level" id="jlevel-lp">Aprendiz</div>
+        <div class="journey-stars">⭐ <b id="jpts-lp">0</b> estrelas</div>
+      </div>
+    </div>
+    <div class="journey-bar-wrap"><div class="journey-bar" id="jbar-lp" style="width:0%"></div></div>
+    <div class="journey-next" id="jnext-lp">Responda os treinos para ganhar estrelas!</div>
+    <div class="journey-badges" id="jbadges-lp">
+      <div class="jbadge locked" title="Aprendiz">🌱</div>
+      <div class="jbadge locked" title="Explorador">🧭</div>
+      <div class="jbadge locked" title="Aventureiro">⚔️</div>
+      <div class="jbadge locked" title="Mestre">🎓</div>
+      <div class="jbadge locked" title="Campeão">👑</div>
+    </div>
+  </div>
+  <div class="info-box" style="border-color:var(--lp-m)">
+    <h4 style="color:var(--lp)">📚 Conteúdos</h4>
+    <div class="ig">
+      <div class="irow"><span class="ic">🦊</span><span><strong>F/V</strong> p.37–39 &nbsp;·&nbsp; <strong>P/B</strong> p.57–58 &nbsp;·&nbsp; <strong>Sílaba</strong> p.59–60 &nbsp;·&nbsp; <strong>Frase</strong> p.61–62</span></div>
+      <div class="irow"><span class="ic">🔤</span><span><strong>C/QU</strong> p.156–157 &nbsp;·&nbsp; <strong>GU/QU</strong> p.104–105 &nbsp;·&nbsp; <strong>H inicial</strong> p.158–159</span></div>
+      <div class="irow"><span class="ic">🍫</span><span><strong>CH/LH/NH</strong> p.167–169 &nbsp;·&nbsp; <strong>Gêneros textuais</strong> Un.1,2,4 e 6</span></div>
+      <div class="irow"><span class="ic">📚</span><span><strong>Livro paradidático:</strong> O colecionador de palavras</span></div>
+    </div>
+    <div class="dica"><span>💡</span><span><b>Novo em junho!</b> GU/QU: <b>GU</b> antes de E/I = /g/ (guitarra, agulha) · <b>QU</b> antes de E/I = /k/ (queijo, quilo) · Exercício: caqui=QU · cinema=C · cavalo=C · cupim=C</span></div>
+  </div>
+
+  <div class="stitle" style="font-size:1.05rem">🃏 Flashcards — Português</div>
+  <div class="fc-hint-bar">👆 Clique · Pense · Vire para ver a resposta</div>
+
+  <div class="fc-section">
+    <div class="fc-sub">🆕 Novidade de junho: GU e QU</div>
+    <div class="fc-grid">
+      <div class="fc-wrap lp-fc" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Quando usar GU e quando usar QU? Por que GUITARRA usa GU e QUEIJO usa QU?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+          <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Depende do <strong>som</strong> desejado antes de E ou I!<div class="fc-eg"><b>GU</b> antes de E/I → som /g/: gui-tar-ra · a-gue-lha · guer-ra<br><b>QU</b> antes de E/I → som /k/: quei-jo · qui-lo · ca-qui<br><br>Do exercício da escola:<br><b>caqui=QU</b> · cinema=C · cavalo=C · cupim=C</div></div></div>
+        </div>
+      </div>
+      <div class="fc-wrap lp-fc" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">No texto "Na VILA tinha uma FILA" — o que diferencia estas palavras?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+          <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Do exercício de junho:<div class="fc-eg">VILA (com <b>V</b>) e FILA (com <b>F</b>)<br><br>As letras que tornam essas palavras diferentes são o <b>V</b> e o <b>F</b>!<br><br>Muda uma letra → muda a palavra inteira!</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-section">
+    <div class="fc-sub">📝 Revisão — conteúdos de maio que também caem</div>
+    <div class="fc-grid">
+      <div class="fc-wrap lp-fc" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Complete: A gali___a e o coe___o tomam ___ocolate de ma___ã.</div><div class="fc-hint">↩️ Vire para ver</div></div>
+          <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans"><div class="fc-eg">gali<b>NH</b>a · coe<b>LH</b>o · <b>CH</b>ocolate · ma<b>NH</b>ã<br><br><b>NH:</b> galinha, manhã, minhoca<br><b>LH:</b> coelho, folha, agulha<br><b>CH:</b> chocolate, chuva, chave</div></div></div>
+        </div>
+      </div>
+      <div class="fc-wrap lp-fc" onclick="this.classList.toggle('flipped')">
+        <div class="fc-inner">
+          <div class="fc-front"><div class="fc-label">Pergunta</div><div class="fc-q">Quantas sílabas têm: GUITARRA, QUEIJO e CAQUI?</div><div class="fc-hint">↩️ Vire para ver</div></div>
+          <div class="fc-back"><div class="fc-back-label">Resposta</div><div class="fc-ans">Bata palmas para contar!<div class="fc-eg">GUI-TAR-RA → <b>3</b> sílabas (trissílaba)<br>QUEI-JO → <b>2</b> sílabas (dissílaba)<br>CA-QUI → <b>2</b> sílabas (dissílaba)<br>CI-NE-MA → <b>3</b> sílabas</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✏️ Treino — Português</div>
+  <div class="quiz-block">
+    <div class="qb-title" style="color:var(--lp)">🎯 Nível 1 — GU/QU e sons das letras</div>
+    <div class="qb-sub">Novidades de junho + revisão de maio</div>
+    <div id="qz-lp1" class="qz-wrap"></div>
+  </div>
+  <div class="quiz-block" style="border-color:var(--lp-m)">
+    <div class="qb-title" style="color:var(--lp)">🎯 Nível 2 — CH/LH/NH · C/QU · H mudo</div>
+    <div class="qb-sub">Dígrafos e ortografia</div>
+    <div id="qz-lp2" class="qz-wrap"></div>
+  </div>
+  <div class="quiz-block" style="border-color:var(--lp-m)">
+    <div class="qb-title" style="color:var(--lp)">🎯 Nível 3 — Desafio · Interpretação e gêneros</div>
+    <div class="qb-sub">Gêneros textuais, parágrafo e questões de atenção</div>
+    <div id="qz-lp3" class="qz-wrap"></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📝 Simulado — Português</div>
+  <div class="sim-block lp">
+    <div class="sim-head"><span class="sim-head-ico">📖</span><div><div class="sim-head-title">Simulado — Português</div><div class="sim-head-sub">10 questões · todo o programa de junho · estilo prova</div></div></div>
+    <div class="sim-body"><div id="qz-sim-lp" class="qz-wrap"></div></div>
+      <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">⚡ Desafio Relâmpago <span class="stag">Contra o tempo!</span></div>
+  <div class="relampago lp" id="rel-lp">
+    <div class="rel-head"><span class="rel-ico">⚡</span><div><div class="rel-title">Desafio Relâmpago</div><div class="rel-sub">10 segundos por pergunta · acerte o máximo que conseguir!</div></div></div>
+    <div class="rel-body" id="relbody-lp">
+      <button class="rel-start" onclick="startRelampago('lp','qz-lp3')">▶️ Começar desafio!</button>
+      <div class="rel-record">🏅 Seu recorde: <b id="relrec-lp">0</b> acertos seguidos</div>
+    </div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">🚀 Vai Além <span class="stag">Para mentes curiosas</span></div>
+    <div class="beyond lp">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Por que será que algumas palavras têm letras que a gente nem ouve quando fala, como o H de 'hora' e 'hoje'?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-lp-0',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-lp-0">A língua portuguesa veio mudando ao longo de <b>centenas de anos</b>. Antigamente o H tinha som, mas com o tempo deixamos de pronunciá-lo — só que ele ficou na escrita, como uma 'pegada' da história da palavra!<span class="nudge">🤔 Você consegue pensar em outras palavras que começam com H mudo?</span></div>
+    </div>
+    <div class="beyond lp">
+      <div class="beyond-q"><span class="beyond-spark">💭</span><div class="beyond-text">Se você pudesse inventar uma palavra nova para alguma coisa que ainda não tem nome, qual seria?</div></div>
+      <button class="beyond-toggle" onclick="toggleBeyond('bey-lp-1',this)">💡 Ver uma ideia</button>
+      <div class="beyond-idea" id="bey-lp-1">As palavras são <b>inventadas pelas pessoas</b>! 'Selfie' e 'internet' não existiam há pouco tempo. Toda palavra um dia foi nova. Uma boa palavra geralmente é fácil de falar e lembra o que ela significa.<span class="nudge">🤔 Como você escreveria a sua palavra nova, usando as regras que aprendeu (sílabas, letras certas)?</span></div>
+    </div>
+    <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">📔 Glossário Ilustrado <span class="stag">Palavras-chave</span></div>
+  <div class="gloss-grid">
+    <div class="gloss-card lp"><div class="gloss-top"><span class="gloss-emo">🔤</span><span class="gloss-word">Dígrafo</span></div><div class="gloss-def"><b>Duas letras</b> que fazem <b>um só som</b> (CH, LH, NH).</div></div>
+    <div class="gloss-card lp"><div class="gloss-top"><span class="gloss-emo">🤫</span><span class="gloss-word">H mudo</span></div><div class="gloss-def">O H no começo da palavra que <b>não tem som</b> (hoje, hora).</div></div>
+    <div class="gloss-card lp"><div class="gloss-top"><span class="gloss-emo">🎸</span><span class="gloss-word">GU e QU</span></div><div class="gloss-def">GU faz som /g/ e QU faz som /k/ antes de E ou I.</div></div>
+    <div class="gloss-card lp"><div class="gloss-top"><span class="gloss-emo">✂️</span><span class="gloss-word">Sílaba</span></div><div class="gloss-def">Cada <b>pedacinho</b> da palavra (ba-na-na = 3 sílabas).</div></div>
+    <div class="gloss-card lp"><div class="gloss-top"><span class="gloss-emo">📰</span><span class="gloss-word">Gênero textual</span></div><div class="gloss-def">Tipo de texto: notícia, poesia, bilhete, história...</div></div>
+  </div>
+  <div class="sdiv"></div>
+  <div class="stitle" style="font-size:1.05rem">✅ Resumo antes da Prova <span class="stag">Checklist final</span></div>
+  <div class="resumo lp">
+    <div class="resumo-head"><span class="resumo-ico">🎯</span><div class="resumo-title">Eu já sei...</div></div>
+    <ul class="resumo-list">
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei usar <b>GU</b> (/g/) e <b>QU</b> (/k/) antes de E e I.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei a diferença entre <b>F e V</b>, <b>P e B</b>.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei os dígrafos <b>CH, LH e NH</b>.</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei que o <b>H inicial é mudo</b> (hoje, hora).</span></li>
+      <li class="resumo-item" onclick="this.classList.toggle('done')"><span class="resumo-check">✓</span><span class="resumo-text">Sei separar <b>sílabas</b> e reconhecer uma <b>frase</b> correta (maiúscula + ponto).</span></li>
+    </ul>
+  </div>
+</div>
+</div><!-- /lp -->
+
+</div><!-- /main -->
+
+<!-- Gamificação: toast e celebração -->
+<div class="pts-toast" id="ptsToast">⭐ +10</div>
+<div class="levelup" id="levelupModal">
+  <div class="levelup-card">
+    <span class="levelup-medal" id="luMedal">🏅</span>
+    <div class="levelup-title" id="luTitle">Subiu de nível!</div>
+    <div class="levelup-msg" id="luMsg">Você é incrível!</div>
+    <button class="levelup-btn" onclick="closeLevelUp()">Continuar 🚀</button>
+  </div>
+</div>
+
+<footer>
+  <div>© 2026 Ana Paula Rodrigues Braganholo · Todos os direitos reservados</div>
+</footer>
+
+</div><!-- /shell -->
+
+<script>
+/* ══ STARS ══ */
+(function(){
+  var c=document.getElementById('hdrstars');
+  if(!c)return;
+  for(var i=0;i<24;i++){
+    var s=document.createElement('div');s.className='star';
+    var sz=(Math.random()*2.5+1).toFixed(1);
+    s.style.cssText='width:'+sz+'px;height:'+sz+'px;top:'+(Math.random()*100)+'%;left:'+(Math.random()*100)+'%;--d:'+(Math.random()*2.5+1.5).toFixed(1)+'s;--dl:'+(Math.random()*2).toFixed(1)+'s;';
+    c.appendChild(s);
+  }
+})();
+
+/* ══ GAMIFICAÇÃO: JORNADA DE ESTRELAS ══ */
+var LEVELS = [
+  {name:'Aprendiz',    medal:'🥚', min:0},
+  {name:'Explorador',  medal:'🐣', min:70},
+  {name:'Aventureiro', medal:'🦅', min:170},
+  {name:'Mestre',      medal:'🏆', min:300},
+  {name:'Campeão',     medal:'👑', min:450}
+];
+var SUBJ_NAMES = {geo:'Geografia',mat:'Matemática',his:'História',cie:'Ciências',lp:'Português'};
+
+function gKey(subj){return 'portaljunho_pts_'+subj;}
+function getPts(subj){
+  try{var v=localStorage.getItem(gKey(subj));return v?parseInt(v):0;}catch(e){return 0;}
+}
+function setPts(subj,v){
+  try{localStorage.setItem(gKey(subj),v);}catch(e){}
+}
+function levelFor(pts){
+  var lv=0;
+  for(var i=0;i<LEVELS.length;i++){if(pts>=LEVELS[i].min)lv=i;}
+  return lv;
+}
+function renderJourney(subj){
+  var pts=getPts(subj);
+  var lv=levelFor(pts);
+  var L=LEVELS[lv];
+  var medalEl=document.getElementById('jmedal-'+subj);
+  var levelEl=document.getElementById('jlevel-'+subj);
+  var ptsEl=document.getElementById('jpts-'+subj);
+  var barEl=document.getElementById('jbar-'+subj);
+  var nextEl=document.getElementById('jnext-'+subj);
+  if(!medalEl)return;
+  medalEl.textContent=L.medal;
+  levelEl.textContent=L.name;
+  ptsEl.textContent=pts;
+  // progress to next level
+  var pct,msg;
+  if(lv>=LEVELS.length-1){
+    pct=100;
+    msg='🎉 Nível máximo alcançado! Você é um Campeão!';
+  }else{
+    var cur=LEVELS[lv].min, nxt=LEVELS[lv+1].min;
+    pct=Math.round((pts-cur)/(nxt-cur)*100);
+    if(pct>100)pct=100; if(pct<0)pct=0;
+    msg='Faltam '+(nxt-pts)+' estrelas para virar '+LEVELS[lv+1].name+' '+LEVELS[lv+1].medal;
+  }
+  barEl.style.width=pct+'%';
+  nextEl.textContent=msg;
+  // badges
+  var badges=document.querySelectorAll('#jbadges-'+subj+' .jbadge');
+  badges.forEach(function(b,i){
+    if(i<=lv){b.classList.remove('locked');b.classList.add('unlocked');}
+    else{b.classList.add('locked');b.classList.remove('unlocked');}
+  });
+}
+function showPtsToast(n){
+  var t=document.getElementById('ptsToast');
+  if(!t)return;
+  t.textContent='⭐ +'+n;
+  t.classList.remove('show');
+  void t.offsetWidth;
+  t.classList.add('show');
+}
+function showLevelUp(subj,newLv){
+  var L=LEVELS[newLv];
+  document.getElementById('luMedal').textContent=L.medal;
+  document.getElementById('luTitle').textContent='Você virou '+L.name+'!';
+  document.getElementById('luMsg').textContent='Parabéns! Você está cada vez melhor em '+SUBJ_NAMES[subj]+'! Continue assim! 🌟';
+  document.getElementById('levelupModal').classList.add('show');
+}
+function closeLevelUp(){
+  document.getElementById('levelupModal').classList.remove('show');
+}
+function addPts(subj,n){
+  var before=getPts(subj);
+  var lvBefore=levelFor(before);
+  var after=before+n;
+  setPts(subj,after);
+  var lvAfter=levelFor(after);
+  showPtsToast(n);
+  renderJourney(subj);
+  if(lvAfter>lvBefore){
+    setTimeout(function(){showLevelUp(subj,lvAfter);},900);
+  }
+}
+function resetJourney(subj){
+  if(confirm('Tem certeza que quer zerar as estrelas de '+SUBJ_NAMES[subj]+'?')){
+    setPts(subj,0);
+    renderJourney(subj);
+  }
+}
+// quiz id -> subject
+function subjOf(id){
+  if(id.indexOf('geo')>-1)return 'geo';
+  if(id.indexOf('mat')>-1)return 'mat';
+  if(id.indexOf('his')>-1)return 'his';
+  if(id.indexOf('cie')>-1)return 'cie';
+  if(id.indexOf('lp')>-1)return 'lp';
+  return null;
+}
+// Render all journeys on load
+['geo','mat','his','cie','lp'].forEach(function(s){renderJourney(s);});
+
+/* ══ VAI ALÉM ══ */
+function toggleBeyond(id,btn){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var open=el.classList.contains('show');
+  el.classList.toggle('show');
+  btn.textContent=open?'💡 Ver uma ideia':'🙈 Esconder ideia';
+}
+
+/* ══ DESAFIO RELÂMPAGO ══ */
+var QUIZ_BANKS={}; // preenchido depois que as questões são definidas
+function registerBank(id,questions){QUIZ_BANKS[id]=questions;}
+
+function relRecKey(subj){return 'portaljunho_relrec_'+subj;}
+function getRelRec(subj){try{var v=localStorage.getItem(relRecKey(subj));return v?parseInt(v):0;}catch(e){return 0;}}
+function setRelRec(subj,v){try{localStorage.setItem(relRecKey(subj),v);}catch(e){}}
+
+function startRelampago(subj,bankId){
+  var bank=QUIZ_BANKS[bankId];
+  if(!bank){return;}
+  // embaralhar cópia das questões
+  var qs=bank.slice();
+  for(var i=qs.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=qs[i];qs[i]=qs[j];qs[j]=t;}
+  var body=document.getElementById('relbody-'+subj);
+  var cur=0,streak=0,best=0;
+  var timeLimit=10, timeLeft=timeLimit, timer=null;
+
+  function renderQ(){
+    if(cur>=qs.length){endGame();return;}
+    var q=qs[cur];
+    var opts=q.o.map(function(o,i){return '<button class="qz-opt" data-i="'+i+'">'+o+'</button>';}).join('');
+    body.innerHTML=
+      '<div class="rel-timer-wrap"><div class="rel-timer" id="reltimer-'+subj+'"></div></div>'+
+      '<div class="rel-qcount"><span>Pergunta '+(cur+1)+'</span><span class="rel-score-live">🔥 '+streak+' seguidas</span></div>'+
+      '<div class="qz-q" style="background:var(--srf2)"><div class="qz-txt">'+q.q+'</div><div class="qz-opts">'+opts+'</div></div>';
+    body.querySelectorAll('.qz-opt').forEach(function(btn){
+      btn.addEventListener('click',function(){answer(parseInt(this.dataset.i),q.a);});
+    });
+    startTimer();
+  }
+  function startTimer(){
+    timeLeft=timeLimit;
+    var bar=document.getElementById('reltimer-'+subj);
+    clearInterval(timer);
+    timer=setInterval(function(){
+      timeLeft-=0.1;
+      var pct=(timeLeft/timeLimit)*100;
+      if(bar){bar.style.width=Math.max(0,pct)+'%';if(pct<30)bar.classList.add('danger');else bar.classList.remove('danger');}
+      if(timeLeft<=0){clearInterval(timer);answer(-1,qs[cur].a);}
+    },100);
+  }
+  function answer(idx,correct){
+    clearInterval(timer);
+    if(idx===correct){
+      streak++;
+      if(streak>best)best=streak;
+      cur++;
+      renderQ();
+    }else{
+      endGame();
+    }
+  }
+  function endGame(){
+    clearInterval(timer);
+    var rec=getRelRec(subj);
+    var isNew=best>rec;
+    if(isNew)setRelRec(subj,best);
+    // dar estrelas pela performance (5 por acerto seguido)
+    var earned=best*5;
+    if(earned>0&&typeof addPts==='function')addPts(subj,earned);
+    var medal=best>=8?'🏆':best>=5?'🌟':best>=3?'✅':'💪';
+    var msg=best>=8?'Incrível! Você é um relâmpago!':best>=5?'Muito rápido! Mandou bem!':best>=3?'Bom ritmo! Tente bater o recorde!':'Continue treinando sua velocidade!';
+    body.innerHTML=
+      '<div style="text-align:center;padding:8px 0">'+
+      '<div style="font-size:2.8rem;margin-bottom:6px">'+medal+'</div>'+
+      '<div style="font-family:\'Baloo 2\',cursive;font-size:1.5rem;color:var(--gold)">'+best+' acertos seguidos!</div>'+
+      (isNew?'<div style="font-weight:900;color:var(--green);margin:4px 0">🎉 Novo recorde!</div>':'')+
+      (earned>0?'<div style="font-family:\'Baloo 2\',cursive;color:var(--gold);margin:4px 0">⭐ +'+earned+' estrelas!</div>':'')+
+      '<div style="font-size:.85rem;color:var(--tx2);margin:8px 0 14px">'+msg+'</div>'+
+      '<button class="rel-start" onclick="startRelampago(\''+subj+'\',\''+bankId+'\')">🔄 Jogar de novo</button>'+
+      '<div class="rel-record">🏅 Seu recorde: <b>'+getRelRec(subj)+'</b> acertos seguidos</div>'+
+      '</div>';
+  }
+  renderQ();
+}
+// inicializar recordes exibidos
+['geo','mat','his','cie','lp'].forEach(function(s){
+  var el=document.getElementById('relrec-'+s);
+  if(el)el.textContent=getRelRec(s);
+});
+
+/* ══ NAV ══ */
+function goPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on-home','on-geo','on-mat','on-his','on-cie','on-lp');});
+  var p=document.getElementById('page-'+id); if(p)p.classList.add('active');
+  var btn=document.querySelector('[data-page="'+id+'"]');
+  if(btn)btn.classList.add(btn.dataset.on||'on-home');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nb').forEach(function(b){
+  b.addEventListener('click',function(){goPage(this.dataset.page);});
+});
+
+/* ══ QUIZ ENGINE ══ */
+function buildQuiz(id,questions,nxtCls){
+  if(typeof registerBank==='function')registerBank(id,questions);
+  var container=document.getElementById(id);
+  if(!container)return;
+  var cur=0,correct=0;
+  function render(){
+    if(cur>=questions.length){finish();return;}
+    var q=questions[cur];
+    var opts=q.o.map(function(o,i){return '<button class="qz-opt" data-i="'+i+'">'+o+'</button>';}).join('');
+    container.innerHTML='<div class="qz-q"><div class="qz-meta">Questão '+(cur+1)+' de '+questions.length+'</div><div class="qz-txt">'+q.q+'</div><div class="qz-opts">'+opts+'</div><div class="qz-fb" id="fb-'+id+'"></div><button class="qz-nxt '+nxtCls+'" id="nxt-'+id+'">Próxima ➡️</button></div>';
+    container.querySelectorAll('.qz-opt').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        if(this.classList.contains('lk'))return;
+        var idx=parseInt(this.dataset.i);
+        container.querySelectorAll('.qz-opt').forEach(function(b,i){b.classList.add('lk');if(i===q.a)b.classList.add('ok');});
+        var fb=document.getElementById('fb-'+id);
+        var nxt=document.getElementById('nxt-'+id);
+        if(idx===q.a){this.classList.add('ok');fb.className='qz-fb sh ok';fb.textContent='✅ Correto!';correct++;}
+        else{this.classList.add('er');fb.className='qz-fb sh er';var exp=q.e?'<div class="qz-why">💡 <b>Por quê?</b> '+q.e+'</div>':'';fb.innerHTML='❌ A certa era: '+container.querySelectorAll('.qz-opt')[q.a].textContent+exp;}
+        nxt.style.display='inline-block';
+      });
+    });
+    document.getElementById('nxt-'+id).addEventListener('click',function(){cur++;render();});
+  }
+  function finish(){
+    var pct=Math.round(correct/questions.length*100);
+    var e=pct===100?'🌟':pct>=70?'✅':'💪';
+    var m=pct===100?'Perfeito! Arrasou!':pct>=70?'Muito bem! Continue!':'Continue praticando!';
+    // ── Gamificação: dar estrelas (10 por acerto + bônus 30 se 100%) ──
+    var subj=subjOf(id);
+    var earned=correct*10+(pct===100?30:0);
+    if(subj&&earned>0){ addPts(subj,earned); }
+    var earnedTxt=earned>0?'<div style="font-family:\'Baloo 2\',cursive;font-size:1.1rem;color:var(--gold);margin:6px 0">⭐ +'+earned+' estrelas!</div>':'';
+    container.innerHTML='<div class="qz-fin"><span class="qz-fin-emo">'+e+'</span><div class="qz-fin-score">'+correct+' de '+questions.length+' certas!</div>'+earnedTxt+'<div class="qz-fin-msg">'+m+'</div><button class="qz-retry">🔄 Tentar de novo</button></div>';
+    container.querySelector('.qz-retry').addEventListener('click',function(){buildQuiz(id,questions,nxtCls);});
+  }
+  render();
+}
+
+/* ══════════════════════════════════════════════════
+   QUESTÕES — baseadas nos materiais reais da escola
+   + novas criadas no mesmo estilo e nível
+   30 questões por matéria (3 níveis) + 10 simulado
+══════════════════════════════════════════════════ */
+
+/* GEO 1 — Caminhos e referências */
+buildQuiz('qz-geo1',[
+{q:'Luigi explicou o caminho até a Pizzaria do Reino. Qual ponto de referência indica que Mario chegou ao lugar certo?',o:['O castelo, atrás da pizzaria','O Parque Principal, na entrada','O Mercado de Cogumelos, em frente à pizzaria','A sorveteria, dentro da pizzaria'],a:2},
+{q:'Mario sai de casa, dobra à direita na escola, passa pela farmácia e chega. Quais são os pontos de referência usados?',o:['Casa e mercado','Escola e farmácia','Farmácia e rua','Apenas a escola'],a:1},
+{q:'O cogumelo de bolinhas vermelhas estava fazendo o quê de errado?',o:['Andava sem capacete','Corria no meio da rua','Atravessou fora da faixa de pedestres','Ignorou o semáforo'],a:2},
+{q:'O que o cogumelo de bolinhas vermelhas deveria fazer?',o:['Correr mais rápido','Atravessar na faixa de pedestres','Pedir ajuda pelo celular','Esperar escurecer'],a:1},
+{q:'Um rio é um exemplo de ponto de referência...',o:['Construído','Natural','Artificial','Temporário'],a:1,e:'O rio já existe na natureza, ninguém construiu — por isso é um ponto de referência natural. Escolas e pontes são construídas pelo ser humano.'},
+{q:'Uma escola é um exemplo de ponto de referência...',o:['Natural','Aquático','Construído pelo ser humano','Provisório'],a:2},
+{q:'Ana quer explicar como chegar à sua casa partindo da escola. Ela deve usar...',o:['Apenas números','Pontos de referência como padaria e praça','Apenas o número da rua','Um mapa em inglês'],a:1},
+{q:'Qual destes NÃO é um ponto de referência útil para indicar caminho?',o:['Uma padaria famosa','Um morro alto e visível','A cor favorita da Ana','Uma ponte sobre o rio'],a:2},
+{q:'Pedro mora perto de uma grande árvore. Esse ponto de referência é...',o:['Construído','Artificial','Natural','Temporário'],a:2},
+{q:'Para andar de bicicleta com segurança, o que é obrigatório?',o:['Luvas','Óculos','Capacete','Joelheiras'],a:2},
+],'nxt-geo');
+
+/* GEO 2 — Moradias, planta, maquete */
+buildQuiz('qz-geo2',[
+{q:'A PALAFITA é uma casa construída sobre...',o:['Pedras no campo','Estacas de madeira','Tijolos de barro','Blocos de gelo'],a:1,e:'As estacas levantam a casa acima da água ou do chão úmido — perfeito para quem mora perto de rios que enchem.'},
+{q:'A casa ENXAIMEL é feita com...',o:['Barro, madeira e palha','Toras de madeira encaixadas','Estacas sobre a água','Pedras e cimento'],a:1},
+{q:'A casa de TAIPA ou PAU A PIQUE é feita com...',o:['Toras encaixadas','Estacas sobre a água','Barro, madeira e palha','Tijolos e argamassa'],a:2},
+{q:'Na PLANTA de um lugar, os objetos aparecem...',o:['Vistos de frente','Vistos de cima para baixo','Vistos de lado','Em tamanho real'],a:1,e:'A planta é como a visão de um pássaro voando: olhamos tudo de cima para baixo. Por isso ela é plana (2D) e tem legenda.'},
+{q:'Na MAQUETE, os lugares são representados em...',o:['Tamanho real','Tamanho maior','Tamanho menor que o real, em 3D','Apenas em desenho plano'],a:2},
+{q:'A LEGENDA de uma planta serve para...',o:['Enfeitar o mapa','Indicar a distância real','Explicar os símbolos e cores','Mostrar o nome do desenhista'],a:2},
+{q:'Qual ponto de vista é usado para fazer a planta de uma sala?',o:['De frente','De cima e de lado','De cima para baixo','De trás'],a:2},
+{q:'Na planta da sala, os alunos em roda de conversa aparecem...',o:['Em fila','Em grupos de quatro','Em círculo','De costas'],a:2},
+{q:'Qual moradia é mais adequada para quem vive às margens de um rio com cheias?',o:['Casa enxaimel','Casa de taipa','Palafita','Apartamento'],a:2},
+{q:'A visão "de cima e de lado" também é chamada de visão...',o:['Frontal','Em perspectiva','Aérea','Lateral'],a:1},
+],'nxt-geo');
+
+/* GEO 3 — Desafio */
+buildQuiz('qz-geo3',[
+{q:'A mãe diz: "Vire à esquerda na praça, siga até o semáforo e a padaria está à direita." Qual é o ponto de referência mais importante?',o:['A casa','A praça e o semáforo','O caminho de volta','O número da rua'],a:1},
+{q:'Ao olhar para a maquete de uma escola, você vê o lugar de qual ponto de vista?',o:['De cima para baixo','De frente','De cima e de lado','Aérea total'],a:2},
+{q:'João mora em uma palafita. Qual é a característica principal da casa dele?',o:['Feita de toras encaixadas','Feita de barro e palha','Construída sobre estacas','Paredes de vidro'],a:2},
+{q:'A família de Sofia mora no campo. Qual transporte ela provavelmente NÃO usa?',o:['Ônibus escolar','Carro','Metrô','Bicicleta'],a:2},
+{q:'Um mapa tem um símbolo de árvore verde para parques. Isso faz parte da...',o:['Título','Legenda','Escala','Borda'],a:1},
+{q:'Qual afirmação sobre a PLANTA está CORRETA?',o:['Mostra em tamanho real','É vista de cima e tem legenda','É um objeto 3D','Mostra de frente'],a:1},
+{q:'No exercício dos cogumelos, quais estavam CERTOS?',o:['O de bolinhas vermelhas','Os que usavam capacete e atravessavam na faixa','O que andava no meio da rua','Nenhum'],a:1},
+{q:'Pedro indica o caminho para alguém que nunca foi ao bairro. Qual informação é MAIS útil?',o:['Que a casa é bonita','A cor da porta','"Depois da farmácia azul"','O número de passos'],a:2},
+{q:'"Os pedestres devem andar nas calçadas." Essa é uma regra de...',o:['Educação','Segurança no trânsito','Organização','Da escola'],a:1},
+{q:'A visão "de cima para baixo" é como a de um pássaro. Qual representação usa essa visão?',o:['Foto de frente','Maquete','Planta de uma sala','Desenho de perfil'],a:2},
+],'nxt-geo');
+
+/* GEO SIM */
+buildQuiz('qz-sim-geo',[
+{q:'O Mercado de Cogumelos, citado por Luigi, é um ponto de referência...',o:['Natural','Construído','Aéreo','Temporário'],a:1},
+{q:'Qual moradia é construída SOBRE ESTACAS de madeira?',o:['Enxaimel','Taipa','Palafita','Iglu'],a:2},
+{q:'O que a LEGENDA de uma planta informa?',o:['O tamanho real','Quem fez o mapa','O significado dos símbolos','A distância'],a:2},
+{q:'Para andar de bicicleta com segurança é obrigatório usar...',o:['Luvas','Óculos','Capacete','Joelheiras'],a:2},
+{q:'Qual ponto de vista é usado na PLANTA?',o:['De frente','De cima e de lado','De cima para baixo','De trás'],a:2},
+{q:'Escola, ponte e mercado são pontos de referência...',o:['Naturais','Aquáticos','Construídos','Temporários'],a:2},
+{q:'A MAQUETE representa um lugar em...',o:['Tamanho real 2D','Tamanho menor 3D','Tamanho maior 2D','Tamanho real 3D'],a:1},
+{q:'Os pedestres devem atravessar a rua...',o:['Onde for mais rápido','Na faixa com semáforo verde','No meio da rua','Correndo'],a:1},
+{q:'A casa ENXAIMEL tem...',o:['Barro e palha','Toras de madeira encaixadas visíveis','Estacas na água','Tijolos aparentes'],a:1},
+{q:'Ana usou morro, rio e escola como referências. Quais são naturais?',o:['Só o morro','Só o rio','O morro e o rio','Todos'],a:2},
+],'nxt-geo');
+
+/* MAT 1 — Dinheiro e troco */
+buildQuiz('qz-mat1',[
+{q:'A mãe de Fernando pagou R$10 por um suco de R$7. Qual é o troco?',o:['R$1','R$2','R$3','R$4'],a:2,e:'Troco é quanto sobra: R$10 menos R$7 dá R$3. Sempre subtraia o preço do valor que você pagou.'},
+{q:'Família de Mariana: 2×R$20 + 5×R$10 na excursão. Total gasto:',o:['R$70','R$80','R$90','R$100'],a:2},
+{q:'Lucas tem 4 notas de R$10 + 1 nota de R$2 + 1 moeda de R$1. Total:',o:['R$40','R$41','R$42','R$43'],a:3},
+{q:'Pedro guardou 1×R$20 + 1×R$5 + 2×R$2 + 1×R$1. Total:',o:['R$28','R$29','R$30','R$31'],a:2},
+{q:'Caixa de maçãs (R$12) + bandeja de morangos (R$6). Total:',o:['R$16','R$17','R$18','R$20'],a:2},
+{q:'Mariana pagou R$85 em compras de R$82. Troco:',o:['R$1','R$2','R$3','R$5'],a:2},
+{q:'Suco custa R$7. Paguei com R$10. Como recebo o troco?',o:['Uma nota de R$5','Uma nota de R$3','Uma de R$2 + uma de R$1','Uma moeda de R$3'],a:2},
+{q:'Sofia tem R$30. Trocando por moedas de R$1, quantas moedas terá?',o:['3','10','30','300'],a:2},
+{q:'Menor quantidade de cédulas para pagar R$90 sem troco:',o:['9 notas de R$10','1×R$50 + 2×R$20','4×R$20 + R$10','3 notas de R$30'],a:1},
+{q:'Gastei R$60 em camisetas e R$22 num vasinho. Total:',o:['R$72','R$82','R$78','R$88'],a:1},
+],'nxt-mat');
+
+/* MAT 2 — Números */
+buildQuiz('qz-mat2',[
+{q:'312 por extenso é...',o:['Trezentos e dois','Trezentos e doze','Trinta e doze','Trezentos e vinte'],a:1,e:'3 centenas = trezentos, 1 dezena + 2 unidades = doze. Junte: trezentos e doze!'},
+{q:'Qual é o SUCESSOR de 299?',o:['298','300','301','309'],a:1,e:'Sucessor é o número que vem logo depois — é só somar 1. Depois de 299 vem 300.'},
+{q:'Qual é o ANTECESSOR de 500?',o:['501','489','499','400'],a:2},
+{q:'157 por extenso é...',o:['Cento e cinquenta e sete','Quinhentos e sete','Cento e setenta e cinco','Cento e cinquenta'],a:0},
+{q:'208 por extenso é...',o:['Duzentos e oito','Duzentos e dezoito','Vinte e oito','Duzentos e oitenta'],a:0},
+{q:'O número 604 tem quantas centenas?',o:['4','0','6','60'],a:2},
+{q:'320 por extenso é...',o:['Trezentos e dois','Trezentos e vinte','Três mil e vinte','Trinta e dois'],a:1},
+{q:'3 caixas de 100 + 2 sacos de 10 + 8 soltas. Total:',o:['328','238','382','832'],a:0},
+{q:'Qual sequência está em ordem DECRESCENTE?',o:['10–28–73','28–73–10','73–28–10','73–10–28'],a:2},
+{q:'Contando de 10 em 10: 90 – 100 – ___ – 120',o:['105','108','110','115'],a:2},
+],'nxt-mat');
+
+/* MAT 3 — Desafio */
+buildQuiz('qz-mat3',[
+{q:'No gráfico: Ciências teve 45 votos e Ed. Física teve 25. Qual a diferença?',o:['15','20','25','10'],a:1},
+{q:'Mariana usou 7 cédulas para pagar R$90. Qual a MENOR quantidade de cédulas para o mesmo valor?',o:['3: R$50+R$20+R$20','2: R$50+R$40','4: R$20×3+R$30','1 de R$90'],a:0},
+{q:'65 por extenso é...',o:['Cinquenta e seis','Sessenta e cinco','Cinquenta e cinco','Setenta e cinco'],a:1},
+{q:'Qual é o ANTECESSOR de 200?',o:['201','199','190','200'],a:1},
+{q:'Qual é o SUCESSOR de 999?',o:['998','990','1000','909'],a:2},
+{q:'Pedro tem R$30 e Sofia R$25. Sofia troca tudo por moedas de R$1. Quantas moedas?',o:['20','30','25','35'],a:2},
+{q:'Maçãs (R$12) + morangos (R$6) = R$18. Paguei R$20. Troco:',o:['R$1','R$2','R$3','R$4'],a:1},
+{q:'Qual número tem 8 centenas, 5 dezenas e 0 unidades?',o:['85','508','850','805'],a:2},
+{q:'4 notas de R$10 + 1 de R$5 + 2 moedas de R$1. Dá para comprar algo de R$47?',o:['Não, só tem R$45','Sim, tem exatamente R$47','Sim, e ainda sobra','Não, só tem R$40'],a:1},
+{q:'A família pagou R$82 com R$50+R$10+R$10+R$10+R$5. Quanto pagou a mais?',o:['R$1','R$2','R$3','R$5'],a:2},
+],'nxt-mat');
+
+/* MAT SIM */
+buildQuiz('qz-sim-mat',[
+{q:'R$60 + R$22 = ?',o:['R$72','R$82','R$78','R$88'],a:1},
+{q:'Troco de R$85 pagos em compras de R$82:',o:['R$1','R$2','R$3','R$5'],a:2},
+{q:'Lucas: 4×R$10 + 1×R$2 + 1×R$1. Total:',o:['R$41','R$42','R$43','R$44'],a:2},
+{q:'157 por extenso:',o:['Cento e cinquenta e sete','Quinhentos e sete','Cento e cinquenta','Cento e setenta e cinco'],a:0},
+{q:'ANTECESSOR de 300:',o:['301','289','299','290'],a:2},
+{q:'3 caixas×100 + 4 sacos×10 + 7 soltos:',o:['347','374','437','743'],a:0},
+{q:'Qual sequência está CRESCENTE?',o:['73–28–10','10–73–28','10–28–73','28–10–73'],a:2},
+{q:'Menor quantidade de cédulas para R$90:',o:['9 de R$10','1×R$50 + 2×R$20','4×R$20 + R$10','3×R$30'],a:1},
+{q:'65 por extenso:',o:['Cinquenta e seis','Sessenta e cinco','Cinquenta e cinco','Setenta e seis'],a:1},
+{q:'Mãe pagou R$10 por suco de R$7. Troco:',o:['R$1','R$2','R$3','R$4'],a:2},
+],'nxt-mat');
+
+/* HIS 1 — Família */
+buildQuiz('qz-his1',[
+{q:'Na árvore da Mariana, quem é o pai?',o:['Felipe','Ana','João','Paula'],a:2},
+{q:'Na árvore da Mariana, quem é a tia?',o:['Ana','Teresa','Lourdes','Paula'],a:3},
+{q:'Os avós PATERNOS da Mariana são...',o:['Lourdes e Azis','João e Ana','Teresa e Basílio','Paula e João'],a:2},
+{q:'O filho do tio da Bia é o seu...',o:['Irmão','Sobrinho','Primo','Cunhado'],a:2,e:'Os filhos dos seus tios são seus primos. Vocês têm os mesmos avós!'},
+{q:'Gustavo é irmão da mãe da Bia. Ele é o que de Bia?',o:['Primo','Avô','Tio','Padrinho'],a:2},
+{q:'A irmã do papai da Bia é a sua...',o:['Avó','Prima','Tia','Madrinha'],a:2},
+{q:'O pai da mamãe da Bia é o avô...',o:['Paterno','Materno','Adotivo','Bisavô'],a:1},
+{q:'Na família da Mariana, quem é Felipe?',o:['O pai','O avô','O irmão','O primo'],a:2},
+{q:'O que é uma árvore genealógica?',o:['Uma árvore do jardim','Um diagrama que mostra a família e suas relações','Um livro de histórias','Um mapa do bairro'],a:1},
+{q:'A mãe da mamãe da Bia é a avó...',o:['Paterna','Materna','Adotiva','Bisavó'],a:1},
+],'nxt-his');
+
+/* HIS 2 — Escolas e tradições */
+buildQuiz('qz-his2',[
+{q:'A escola ribeirinha fica localizada...',o:['No centro da cidade','Na margem de um rio','No topo de uma montanha','Num campo aberto'],a:1,e:'Ribeirinha vem de \'ribeira\' (beira do rio). Por isso os alunos chegam de barco ou canoa.'},
+{q:'Como Ana e Pedro chegam à escola?',o:['De ônibus','A pé','De barco ou canoa','De bicicleta'],a:2},
+{q:'Entre agosto e outubro, o que dificulta a viagem à escola ribeirinha?',o:['Muito vento','As águas do rio ficam baixas','O barco quebra','A escola fecha'],a:1},
+{q:'Qual transporte os ribeirinhos NÃO usam no rio?',o:['Barco a remo','Canoa','Ônibus escolar','Barco a motor'],a:2},
+{q:'O que são TRADIÇÕES de família?',o:['Regras do governo','Costumes passados de geração em geração','Leis escolares','Normas da cidade'],a:1},
+{q:'O relógio com campainhas corresponde ao atual...',o:['Smartphone','Câmera digital','Ferro elétrico','Despertador digital'],a:3},
+{q:'A máquina fotográfica de rolo corresponde ao atual...',o:['Despertador','Ferro elétrico','Câmera digital / celular','Rádio'],a:2},
+{q:'"Passar conhecimento de geração em geração" significa...',o:['Guardar só para si','Esquecer o que foi aprendido','Ensinar aos mais novos o que aprendemos','Não mudar nada'],a:2},
+{q:'Uma família pode ser formada por...',o:['Só pai, mãe e filhos','Só pessoas com o mesmo sobrenome','Pessoas que se amam e cuidam umas das outras','Só parentes de sangue'],a:2},
+{q:'A escola ribeirinha mostra que escolas podem ser diferentes dependendo...',o:['Do número de alunos','Do lugar onde as pessoas vivem','Da quantidade de professores','Do número de salas'],a:1},
+],'nxt-his');
+
+/* HIS 3 — Desafio */
+buildQuiz('qz-his3',[
+{q:'"Joca é filho do meu tio" e "Gustavo é irmão da minha mãe". Joca e Gustavo são, respectivamente...',o:['Irmão / Primo','Primo / Tio','Tio / Primo','Primo / Irmão'],a:1},
+{q:'Os avós maternos são os pais da MÃE. Os avós maternos da Mariana são...',o:['Teresa e Basílio','João e Ana','Lourdes e Azis','Paula e Felipe'],a:2},
+{q:'Quando o rio fica com águas baixas, a viagem de barco fica...',o:['Mais rápida','Mais fácil','Mais difícil e demorada','Impossível'],a:2},
+{q:'"Quem é o pai da minha mamãe?" A resposta é o seu...',o:['Tio paterno','Avô materno','Primo','Bisavô'],a:1},
+{q:'Pai, mãe, dois filhos e uma avó morando juntos. Quantas gerações?',o:['1','2','3','4'],a:2},
+{q:'O ferro a carvão e o ferro elétrico têm a mesma função, mas diferem no...',o:['Tamanho apenas','Funcionamento e época','Material que passam','Formato do cabo'],a:1},
+{q:'Ana e Pedro vão à escola de canoa. Isso mostra que as escolas...',o:['São todas iguais','Podem ser diferentes dependendo do lugar','Devem ter o mesmo transporte','Ficam sempre na cidade'],a:1},
+{q:'O que a árvore genealógica NÃO mostra?',o:['Os nomes da família','Como as pessoas se relacionam','A cor favorita de cada um','Quem são avós e tios'],a:2},
+{q:'Passar a receita da vovó para os netos é um exemplo de...',o:['Tradição familiar','Lei escolar','Regra do bairro','Norma do governo'],a:0},
+{q:'A escola fica na margem de um rio. Em qual transporte NÃO dá para ir?',o:['Canoa','Barco a remo','Metrô ou ônibus escolar','Barco a motor'],a:2},
+],'nxt-his');
+
+/* HIS SIM */
+buildQuiz('qz-sim-his',[
+{q:'Joca é filho do tio da Bia. Que grau de parentesco ele tem com ela?',o:['Irmão','Primo','Tio','Sobrinho'],a:1},
+{q:'Na árvore genealógica da Mariana, qual é o nome do pai dela?',o:['Felipe','Ana','João','Basílio'],a:2},
+{q:'Os avós MATERNOS de Mariana são...',o:['Teresa e Basílio','João e Ana','Lourdes e Azis','Paula e Felipe'],a:2},
+{q:'Como Ana e Pedro chegam à escola ribeirinha?',o:['De ônibus','De bicicleta','De barco ou canoa','A pé'],a:2},
+{q:'Entre agosto e outubro o rio fica com as águas...',o:['Cheias','Baixas','Paradas','Congeladas'],a:1},
+{q:'Que objeto moderno faz o mesmo que o antigo relógio com campainhas?',o:['Smartphone','Câmera','Despertador digital','Ferro elétrico'],a:2},
+{q:'Tradições são costumes...',o:['Inventados agora','Passados de geração em geração','Impostos pelo governo','Que mudam toda semana'],a:1},
+{q:'A irmã do pai da Bia é a sua...',o:['Prima','Avó','Tia','Madrinha'],a:2},
+{q:'O que diferencia a escola ribeirinha das da cidade?',o:['Tem mais alunos','Os alunos chegam de barco e fica na margem do rio','Não tem professores','Funciona à noite'],a:1},
+{q:'Joca é filho do tio e Gustavo é irmão da mãe. A sequência é...',o:['tio · primo','primo · tio','irmão · avô','tio · avô'],a:1},
+],'nxt-his');
+
+/* CIE 1 — Seres vivos */
+buildQuiz('qz-cie1',[
+{q:'Para que serve a RAIZ das plantas?',o:['Produzir flores','Prender a planta no solo e retirar água e sais minerais','Produzir o alimento','Dar cor à planta'],a:1,e:'A raiz tem duas funções: segura a planta firme no chão e puxa do solo a água e os sais que ela precisa.'},
+{q:'A raiz retira do SOLO a...',o:['Luz e gás carbônico','Água e sais minerais','Energia e oxigênio','Vitaminas e proteínas'],a:1},
+{q:'As ABELHAS se relacionam com as flores através do...',o:['Néctar apenas','Pólen — ajudando na polinização','Mel que as flores fazem','Solo'],a:1,e:'Ao buscar néctar, a abelha carrega o pólen de flor em flor. Isso é a polinização, que ajuda novas plantas a nascer.'},
+{q:'As ARARAS têm que tipo de relação com as árvores?',o:['Comem as folhas','Usam os troncos como abrigo','Carregam pólen','Parasitismo'],a:1},
+{q:'Os VEADOS têm que relação com as plantas?',o:['Abrigo','Polinização','Alimentação — comem as plantas','Parasitismo'],a:2},
+{q:'Os MORCEGOS se relacionam com as plantas por meio de...',o:['Raízes','Frutos e pólen','Solo e água','Troncos'],a:1},
+{q:'"A raiz serve para ___ as plantas no solo."',o:['Enfeitar','Prender','Nutrir','Colorir'],a:1},
+{q:'A planta precisa da raiz para retirar do solo água e ___ minerais.',o:['Vitaminas','Gorduras','Sais','Açúcares'],a:2},
+{q:'Qual ser vivo ajuda na POLINIZAÇÃO?',o:['Veados','Araras','Abelhas','Taturanas'],a:2},
+{q:'"Ninguém vive sozinho" significa que os seres vivos...',o:['Vivem isolados','Se relacionam uns com os outros','Não precisam de água','Vivem longe das plantas'],a:1},
+],'nxt-cie');
+
+/* CIE 2 — Materiais */
+buildQuiz('qz-cie2',[
+{q:'De onde vem o PLÁSTICO?',o:['Da madeira','Do algodão','Do petróleo','Das rochas'],a:2,e:'O plástico é feito do petróleo, que leva milhões de anos para se formar. Por isso devemos reciclar!'},
+{q:'O petróleo demora quanto tempo para se formar?',o:['Alguns anos','Centenas de anos','Milhões de anos','Dias'],a:2},
+{q:'O VIDRO é feito a partir de...',o:['Petróleo','Madeira','Areia','Metal'],a:2},
+{q:'Os METAIS são retirados dos minérios dentro das...',o:['Oceanos','Plantas','Rochas','Nuvens'],a:2},
+{q:'Qual propriedade está ligada a liso, rugoso ou áspero?',o:['Aparência','Elasticidade','Permeabilidade','Textura'],a:3},
+{q:'A ELASTICIDADE é a capacidade de um material de...',o:['Ser dobrado','Esticar e voltar à forma inicial','Deixar líquido passar','Aguenta impactos'],a:1},
+{q:'Qual propriedade permite que um material seja dobrado facilmente sem quebrar?',o:['Elasticidade','Tenacidade','Flexibilidade','Permeabilidade'],a:2},
+{q:'A TENACIDADE indica que um material...',o:['É macio','Aguenta impactos sem quebrar fácil','Deixa a luz passar','Pode ser dobrado'],a:1},
+{q:'Qual é a PRIMEIRA etapa do caminho do algodão?',o:['Virar fios','Virar tecido','Colheita do algodoeiro','Virar roupa'],a:2},
+{q:'Afirmação correta sobre o vidro:',o:['Não pode ser reciclado','É feito só de areia pura','Quando quebra, os cacos podem ser reciclados','É feito de petróleo'],a:2},
+],'nxt-cie');
+
+/* CIE 3 — Desafio */
+buildQuiz('qz-cie3',[
+{q:'Se as abelhas desaparecessem, o que aconteceria com plantas que dependem de polinização?',o:['Nada','Deixariam de se reproduzir bem','Cresceriam mais rápido','Precisariam de mais água'],a:1},
+{q:'Um casaco de lã e um de couro têm em comum: ambos vêm de...',o:['Plantas','Rochas','Animais','Petróleo'],a:2},
+{q:'Qual afirmação sobre o petróleo está CORRETA?',o:['É retirado fácil da superfície','Demora milhões de anos e fica abaixo da terra/mar','É feito de areia','É renovável e nunca acaba'],a:1},
+{q:'No mapa mental, qual letra representa a APARÊNCIA?',o:['A','B','C','D'],a:1},
+{q:'Qual material reciclado vira latas, tesouras e anéis?',o:['Plástico','Vidro','Metal','Algodão'],a:2},
+{q:'Qual é a ÚLTIMA etapa do caminho do algodão?',o:['Colheita','Virar fios','Virar tecidos','Tecidos viram roupas'],a:3},
+{q:'O mármore branco, usado em pias, é exemplo de...',o:['Metal','Plástico','Rocha','Vidro'],a:2},
+{q:'Por que "ninguém vive sozinho" na natureza?',o:['Animais vivem em grupos','Seres vivos dependem uns dos outros','Plantas vivem em florestas','Animais precisam de pessoas'],a:1},
+{q:'Você aperta uma borracha e ela volta ao formato. Qual propriedade é essa?',o:['Flexibilidade','Tenacidade','Elasticidade','Permeabilidade'],a:2},
+{q:'O plástico vem do petróleo, que demora milhões de anos. O que isso nos diz?',o:['É barato e fácil de fazer','Devemos usar com cuidado e reciclar','Pode ser jogado fora sem problema','É infinito'],a:1},
+],'nxt-cie');
+
+/* CIE SIM */
+buildQuiz('qz-sim-cie',[
+{q:'A raiz retira do solo água e...',o:['Vitaminas','Gorduras','Sais minerais','Açúcares'],a:2},
+{q:'O petróleo demora ___ de anos para se formar.',o:['Centenas','Dezenas','Milhões','Bilhões'],a:2},
+{q:'A propriedade ligada a cor, brilho e transparência é a...',o:['Textura','Elasticidade','Aparência','Tenacidade'],a:2},
+{q:'As abelhas se relacionam com as flores através do...',o:['Néctar só','Pólen, na polinização','Mel das flores','Solo'],a:1},
+{q:'Ordem CORRETA do algodão:',o:['Roupas→Tecidos→Fios→Colheita','Colheita→Fios→Tecidos→Roupas','Fios→Colheita→Roupas→Tecidos','Tecidos→Fios→Colheita→Roupas'],a:1},
+{q:'O vidro é feito de...',o:['Petróleo','Madeira','Areia','Metal'],a:2},
+{q:'Os metais vêm dos minérios dentro das...',o:['Oceanos','Plantas','Rochas','Nuvens'],a:2},
+{q:'A FLEXIBILIDADE é a capacidade de...',o:['Esticar e voltar','Aguenta impactos','Ser dobrado facilmente','Deixar líquidos passarem'],a:2},
+{q:'Araras usam os troncos das árvores como...',o:['Alimento','Abrigo','Polinização','Parasitismo'],a:1},
+{q:'Qual é a afirmação verdadeira sobre o vidro quebrado?',o:['Não pode ser reciclado','Os cacos podem ir para reciclagem','Vira petróleo','Nunca é transparente'],a:1},
+],'nxt-cie');
+
+/* LP 1 — GU/QU e F/V */
+buildQuiz('qz-lp1',[
+{q:'GUITARRA usa GU antes de qual vogal?',o:['a','o','u','i — GU+I = /g/'],a:3},
+{q:'CAQUI usa QU antes de...',o:['a','o','i — QU+I = /k/','u'],a:2},
+{q:'Do gabarito: CINEMA começa com qual letra (e som)?',o:['GU — /g/','QU — /k/','C — /s/ antes de i','K — /k/'],a:2},
+{q:'CUPIM começa com C com som...',o:['/s/ antes de u','/k/ antes de u','/g/ antes de u','/qu/ especial'],a:1},
+{q:'"Na VILA tinha uma FILA." Qual letra diferencia essas palavras?',o:['L e A','V e F','I e A','N e F'],a:1},
+{q:'Qual palavra usa GU com som /g/?',o:['Queijo','Guitarra','Cinema','Caqui'],a:1},
+{q:'Qual palavra usa QU com som /k/?',o:['Guitarra','Guerra','Queijo','Aguentar'],a:2},
+{q:'CAVALO usa C com som /k/ antes de...',o:['e','i','a','qu'],a:2},
+{q:'CENOURA usa C com som /s/ antes de...',o:['a','o','e','u'],a:2},
+{q:'Do gabarito, quais palavras usam C (não QU)?',o:['Caqui e cinema','Cinema, cenoura, cavalo e cupim','Caqui e cenoura','Cinema e caqui'],a:1},
+],'nxt-lp');
+
+/* LP 2 — Dígrafos */
+buildQuiz('qz-lp2',[
+{q:'Complete: A gali___a põe ovo.',o:['CH','LH','NH','HN'],a:2,e:'GaliNHa tem o dígrafo NH, que faz aquele som de \'nha\'. Dois letrinhas juntas formando um som só!'},
+{q:'Complete: O coe___o comeu a cenoura.',o:['NH','CH','HN','LH'],a:3},
+{q:'Complete: ___oveu muito de ma___ã.',o:['LH/LH','CH/NH','NH/CH','CH/LH'],a:1},
+{q:'O H em HIPOPÓTAMO, HELENA e HOJE tem som?',o:['Sim, /h/','Sim, /j/','Não — H inicial é mudo','Depende'],a:2,e:'O H no começo das palavras não tem som nenhum em português. Falamos \'oje\', mas escrevemos \'hoje\'.'},
+{q:'Quantas sílabas tem GUITARRA?',o:['2','3','4','5'],a:1},
+{q:'Quantas sílabas tem QUEIJO?',o:['1','2','3','4'],a:1},
+{q:'Qual frase está CORRETA?',o:['o chocolate é gostoso.','O chocolate é gostoso.','O Chocolate é Gostoso.','O chocolate é gostoso'],a:1},
+{q:'Complete: Vovó pegou a agu___a.',o:['NH','CH','HN','LH'],a:3},
+{q:'Complete: Eu tomo ___ocolate quenti___o.',o:['CH/LH','NH/NH','CH/NH','LH/CH'],a:2},
+{q:'Qual dígrafo aparece em MINHOCA?',o:['CH','LH','HN','NH'],a:3},
+],'nxt-lp');
+
+/* LP 3 — Interpretação e gêneros */
+buildQuiz('qz-lp3',[
+{q:'GU antes de E ou I tem som de...',o:['/k/','/j/','/g/','/gu/'],a:2,e:'GU antes de E ou I faz o som /g/, como em GUItarra e GUErra. O U fica mudo, só ajudando o G.'},
+{q:'QU antes de E ou I tem som de...',o:['/g/','/k/','/qu/','/j/'],a:1},
+{q:'"Na vila tinha uma fila" é um exemplo de qual gênero textual?',o:['Texto informativo','Poesia/cantiga','Bilhete','Receita'],a:1},
+{q:'O que é um texto INFORMATIVO?',o:['Conta uma história imaginária','Explica e informa fatos reais','Tem rimas','É uma mensagem curta'],a:1},
+{q:'O que é um texto NARRATIVO?',o:['Explica fatos reais','Conta uma história com personagens','Tem rimas','É uma lista'],a:1},
+{q:'O que é um BILHETE?',o:['Uma carta longa','Uma mensagem rápida e curta','Um poema','Um texto informativo'],a:1},
+{q:'No exercício de junho, qual letra diferencia VILA de FILA?',o:['A última','O V e o F no início','A do meio','O número de letras'],a:1},
+{q:'Quantas sílabas tem CI-NE-MA?',o:['2','3','4','5'],a:1},
+{q:'GUERRA usa GU (/g/) e QUEIJO usa QU (/k/). O que têm em comum?',o:['Têm 5 letras','O dígrafo vem antes de E ou I — só muda o som','São frutas','Começam com Q'],a:1},
+{q:'O que marca o início de um parágrafo?',o:['O ponto final','Uma linha em branco','O espaço antes da 1ª palavra','Uma letra maiúscula no meio'],a:2},
+],'nxt-lp');
+
+/* LP SIM */
+buildQuiz('qz-sim-lp',[
+{q:'GU antes de E/I tem som de...',o:['/k/','/g/','/j/','/gu/'],a:1},
+{q:'QU antes de E/I tem som de...',o:['/g/','/k/','/qu/','/j/'],a:1},
+{q:'Do gabarito: CINEMA usa a letra...',o:['QU — /k/','GU — /g/','C — /s/ antes de i','K — /k/'],a:2},
+{q:'Complete: A gali___a e o coe___o são amigos.',o:['NH/LH','LH/NH','CH/NH','NH/CH'],a:0},
+{q:'"Na vila tinha uma fila" é uma...',o:['Texto informativo','Poesia/cantiga','Receita','Bilhete'],a:1},
+{q:'Separe em sílabas: GUITARRA',o:['GUI-TAR-RA','G-U-I-T-A-R-R-A','GUITA-RRA','GUI-TARRA'],a:0},
+{q:'O H em HORA e HOJE é...',o:['Sonoro /h/','Mudo — sem som','Sonoro /j/','Sonoro /r/'],a:1},
+{q:'Complete: ___oveu e fiquei mo___ado.',o:['LH/LH','NH/CH','CH/LH','LH/NH'],a:2},
+{q:'Qual sinal mostra onde um parágrafo começa no texto?',o:['O ponto final','Uma linha em branco','O espaço (recuo) antes da 1ª palavra','Uma maiúscula no meio'],a:2},
+{q:'Qual frase termina CORRETAMENTE?',o:['O menino correu','O menino correu.','o menino correu.','O Menino correu'],a:1},
+],'nxt-lp');
+
+</script>
+</body>
+</html>
