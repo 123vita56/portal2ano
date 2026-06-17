@@ -17,6 +17,9 @@
   --bg:    #fafaf8; --surface:#ffffff; --surface2:#f5f5f0; --surface3:#efefea;
   --tx:    #2d2d2d; --tx2:    #5a5a5a; --tx3:    #9a9a8a;
   --border:#e8e8e0; --border2:#d8d8cc;
+  --srf:#ffffff; --srf2:#f5f5f0; --bd:#e8e8e0; --bd2:#d8d8cc;
+  --sh1:0 2px 8px rgba(0,0,0,.08); --sh2:0 4px 16px rgba(0,0,0,.10);
+  --geo-d:#00897b; --mat-d:#1e62c4; --his-d:#c0392b; --cie-d:#059669; --lp-d:#6b3fa0; --gold-m:#fde68a;
   --sh-sm: 0 2px 8px rgba(0,0,0,.08);
   --sh-md: 0 4px 16px rgba(0,0,0,.10);
   --r-sm:10px;--r-md:16px;--r-lg:22px;--r-xl:28px;
@@ -388,6 +391,9 @@ footer div{font-size:.72rem;color:var(--tx3);}
 .resumo-item.done .resumo-text{text-decoration:line-through;color:var(--tx3);}
 .resumo-text b{color:var(--tx);}
 .resumo-item.done .resumo-text b{color:var(--tx3);}
+
+/* Fundo claro fixo para evitar interferência de tema escuro do navegador/preview */
+html,body,.shell,.main,.page,.page.active{background:#fafaf8;}
 </style>
 </head>
 <body>
@@ -431,12 +437,12 @@ footer div{font-size:.72rem;color:var(--tx3);}
     <span style="font-size:2.2rem;flex-shrink:0">🗺️</span>
     <div>
       <div style="font-family:'Baloo 2',cursive;font-size:1.15rem;margin-bottom:4px">Como funciona o plano</div>
-      <div style="font-size:.82rem;color:var(--tx2);line-height:1.5"><b>Fase 1 — Revisão Geral:</b> estude cada matéria com calma, no seu tempo, quando puder. Sem pressa!<br><b>Fase 2 — Reforço:</b> na véspera de cada prova, dê uma revisada rápida para deixar tudo fresquinho na memória. 🌟</div>
+      <div style="font-size:.82rem;color:var(--tx2);line-height:1.5"><b>Fase 1 — Revisão Geral:</b> comece pela ⭐ Super Revisão e estude cada matéria com calma, no seu ritmo. Sem pressa!<br><b>Fase 2 — Provas e Revisões:</b> em cada dia de prova, confira o conteúdo do dia e faça a próxima revisão no melhor momento para a rotina da família. 🌟</div>
     </div>
   </div>
 
   <!-- FASE 1 -->
-  <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:0 0 12px;display:flex;align-items:center;gap:8px">📚 Fase 1 — Revisão Geral <span class="stag" style="font-family:'Nunito',sans-serif">No seu tempo</span></div>
+  <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:0 0 12px;display:flex;align-items:center;gap:8px">📚 Fase 1 — Revisão Geral <span class="stag" style="font-family:'Nunito',sans-serif">⭐ Super Revisão</span></div>
   <div class="crono-grid">
     <div class="crono-day" onclick="goPage('geo')">
       <div class="cd-num" style="color:var(--geo)">🌍</div>
@@ -461,11 +467,11 @@ footer div{font-size:.72rem;color:var(--tx3);}
   </div>
 
   <!-- FASE 2 -->
-  <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:22px 0 12px;display:flex;align-items:center;gap:8px">⚡ Fase 2 — Reforço na Véspera <span class="stag" style="font-family:'Nunito',sans-serif">Datas fixas</span></div>
+  <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:22px 0 12px;display:flex;align-items:center;gap:8px">⚡ Fase 2 — Provas e Revisões <span class="stag" style="font-family:'Nunito',sans-serif">Rotina flexível</span></div>
   <div class="crono-grid">
     <div class="crono-day" style="border-color:var(--geo-m)" onclick="goPage('geo')">
       <div class="cd-num" style="color:var(--geo)">20</div>
-      <div><div class="cd-date">Sábado · 20/06</div><div class="cd-title">🌍 Reforço de Geografia</div><div class="cd-desc">Revisão rápida antes da prova de segunda. (A véspera é a Festa Junina, então o reforço fica no sábado!)</div><span class="cd-badge b-geo">Prova segunda 22/06</span></div>
+      <div><div class="cd-date">Sábado · 20/06</div><div class="cd-title">⭐ Super Revisão Geral</div><div class="cd-desc">Revise um pouquinho de todas as matérias, dando atenção especial à Geografia, que será a primeira prova.</div><span class="cd-badge b-geo">Foco maior: Geografia</span></div>
     </div>
 
     <div class="crono-day pausa">
@@ -475,22 +481,22 @@ footer div{font-size:.72rem;color:var(--tx3);}
 
     <div class="crono-day prova-day" style="border-color:var(--mat-m);background:var(--mat-l)" onclick="goPage('mat')">
       <div class="cd-num" style="color:var(--mat)">22</div>
-      <div><div class="cd-date">Segunda · 22/06</div><div class="cd-title">🔢 Reforço de Matemática <span style="font-size:.72rem;color:var(--geo-d)">· 🌍 Prova de Geografia hoje!</span></div><div class="cd-desc">Hoje tem prova de Geografia! E, à noite, reforço de Matemática para a prova de amanhã.</div><span class="cd-badge b-mat">Prova terça 23/06</span></div>
+      <div><div class="cd-date">Segunda · 22/06</div><div class="cd-title">🌍 Prova de Geografia <span style="font-size:.72rem;color:var(--mat-d)">· 🔢 Revisão de Matemática</span></div><div class="cd-desc">Hoje é a prova de Geografia. Também vale fazer uma revisão rápida de Matemática no melhor momento da rotina, antes da próxima prova.</div><span class="cd-badge b-mat">Próxima prova: Matemática 23/06</span></div>
     </div>
 
     <div class="crono-day prova-day" style="border-color:var(--his-m);background:var(--his-l)" onclick="goPage('his')">
       <div class="cd-num" style="color:var(--his)">23</div>
-      <div><div class="cd-date">Terça · 23/06</div><div class="cd-title">🏛️ Reforço de História <span style="font-size:.72rem;color:var(--mat-d)">· 🔢 Prova de Matemática hoje!</span></div><div class="cd-desc">Prova de Matemática hoje! Depois, reforço de História para a prova de amanhã.</div><span class="cd-badge b-his">Prova quarta 24/06</span></div>
+      <div><div class="cd-date">Terça · 23/06</div><div class="cd-title">🔢 Prova de Matemática <span style="font-size:.72rem;color:var(--his-d)">· 🏛️ Revisão de História</span></div><div class="cd-desc">Hoje é a prova de Matemática. Depois, faça uma revisão rápida de História no momento que funcionar melhor para a família.</div><span class="cd-badge b-his">Próxima prova: História 24/06</span></div>
     </div>
 
     <div class="crono-day prova-day" style="border-color:var(--cie-m);background:var(--cie-l)" onclick="goPage('cie')">
       <div class="cd-num" style="color:var(--cie)">24</div>
-      <div><div class="cd-date">Quarta · 24/06</div><div class="cd-title">🔬 Reforço de Ciências <span style="font-size:.72rem;color:var(--his-d)">· 🏛️ Prova de História hoje!</span></div><div class="cd-desc">Prova de História hoje! Depois, reforço de Ciências para a prova de amanhã.</div><span class="cd-badge b-cie">Prova quinta 25/06</span></div>
+      <div><div class="cd-date">Quarta · 24/06</div><div class="cd-title">🏛️ Prova de História <span style="font-size:.72rem;color:var(--cie-d)">· 🔬 Revisão de Ciências</span></div><div class="cd-desc">Hoje é a prova de História. Também vale revisar Ciências com calma, antes da próxima prova, no horário mais possível.</div><span class="cd-badge b-cie">Próxima prova: Ciências 25/06</span></div>
     </div>
 
     <div class="crono-day prova-day" style="border-color:var(--lp-m);background:var(--lp-l)" onclick="goPage('lp')">
       <div class="cd-num" style="color:var(--lp)">25</div>
-      <div><div class="cd-date">Quinta · 25/06</div><div class="cd-title">📖 Reforço de Português <span style="font-size:.72rem;color:var(--cie-d)">· 🔬 Prova de Ciências hoje!</span></div><div class="cd-desc">Prova de Ciências hoje! Depois, reforço de Português para a última prova.</div><span class="cd-badge b-lp">Prova sexta 26/06</span></div>
+      <div><div class="cd-date">Quinta · 25/06</div><div class="cd-title">🔬 Prova de Ciências <span style="font-size:.72rem;color:var(--lp-d)">· 📖 Revisão de Português</span></div><div class="cd-desc">Hoje é a prova de Ciências. Para fechar a semana, faça uma revisão rápida de Português no melhor momento da rotina.</div><span class="cd-badge b-lp">Próxima prova: Português 26/06</span></div>
     </div>
 
     <div class="crono-day prova-day" style="border-color:var(--lp-m);background:var(--lp-l)" onclick="goPage('lp')">
@@ -1235,7 +1241,9 @@ footer div{font-size:.72rem;color:var(--tx3);}
 </div>
 
 <footer>
-  <div>© 2026 Ana Paula Rodrigues Braganholo · Todos os direitos reservados</div>
+  <div><strong>Feito com 💛 por Aninha, mãe do Joca</strong></div>
+  <div style="margin-top:6px;font-size:.68rem;line-height:1.45;color:var(--tx3)">Material inspirado nos conteúdos trabalhados pela escola e pelos livros didáticos, elaborado apenas para apoiar os estudos em casa. Sem finalidade comercial e complementar aos materiais escolares.</div>
+  <div style="margin-top:6px">© 2026 • Todos os direitos reservados</div>
 </footer>
 
 </div><!-- /shell -->
