@@ -425,58 +425,81 @@ footer div{font-size:.72rem;color:var(--tx3);}
 <!-- ══ HOME / CRONOGRAMA ══ -->
 <div class="page active" id="page-home">
 
-  <div class="stitle">📅 Cronograma de Estudos <span class="stag">15 a 26 de junho</span></div>
+  <div class="stitle">📅 Cronograma de Estudos <span class="stag">Plano em 2 fases</span></div>
 
-  <div class="crono-grid">
-    <div class="crono-day" onclick="goPage('geo')">
-      <div class="cd-num" style="color:var(--geo)">15</div>
-      <div><div class="cd-date">Segunda · 15/06</div><div class="cd-title">🌍 Geografia — Revisão Geral</div><div class="cd-desc">Lugar para morar · pontos de referência · tipos de moradia · planta e maquete</div><span class="cd-badge b-geo countdown" data-prova="2026-06-22">Calculando...</span></div>
-    </div>
-    <div class="crono-day" onclick="goPage('geo')">
-      <div class="cd-num" style="color:var(--geo)">16</div>
-      <div><div class="cd-date">Terça · 16/06</div><div class="cd-title">🌍 Geografia — Reforço + Simulado</div><div class="cd-desc">Meus caminhos · pontos de referência · segurança no trânsito</div><span class="cd-badge b-geo countdown" data-prova="2026-06-22">Calculando...</span></div>
-    </div>
-    <div class="crono-day" onclick="goPage('mat')">
-      <div class="cd-num" style="color:var(--mat)">17</div>
-      <div><div class="cd-date">Quarta · 17/06</div><div class="cd-title">🔢 Matemática — Revisão Geral</div><div class="cd-desc">CDU · ordinais · contagens · operações · dinheiro e cédulas</div><span class="cd-badge b-mat countdown" data-prova="2026-06-23">Calculando...</span></div>
-    </div>
-    <div class="crono-day" onclick="goPage('mat')">
-      <div class="cd-num" style="color:var(--mat)">18</div>
-      <div><div class="cd-date">Quinta · 18/06</div><div class="cd-title">🔢 Matemática — Reforço + Simulado</div><div class="cd-desc">Quanto custa? · troco · problemas com dinheiro</div><span class="cd-badge b-mat countdown" data-prova="2026-06-23">Calculando...</span></div>
-    </div>
-    <div class="crono-day" onclick="goPage('his')">
-      <div class="cd-num" style="color:var(--his)">19</div>
-      <div><div class="cd-date">Sexta · 19/06</div><div class="cd-title">🏛️ História — Revisão + Simulado</div><div class="cd-desc">Árvore genealógica · graus de parentesco · escola ribeirinha · tradições</div><span class="cd-badge b-his countdown" data-prova="2026-06-24">Calculando...</span></div>
-    </div>
-    <div class="crono-day" onclick="goPage('cie')">
-      <div class="cd-num" style="color:var(--cie)">20</div>
-      <div><div class="cd-date">Sábado · 20/06</div><div class="cd-title">🔬 Ciências — Revisão + Simulado</div><div class="cd-desc">Relações entre seres vivos · materiais · propriedades dos materiais</div><span class="cd-badge b-cie countdown" data-prova="2026-06-25">Calculando...</span></div>
-    </div>
-    <div class="crono-day pausa">
-      <div class="cd-num">🎉</div>
-      <div><div class="cd-date">Domingo · 21/06</div><div class="cd-title">Pausa — Festa Junina! 🌽</div><div class="cd-desc">Dia de festa junina e descanso. Nada de estudos — aproveite, divirta-se e renove as energias!</div><span class="cd-badge b-pausa">Festa e descanso!</span></div>
-    </div>
-    <div class="crono-day prova-day" style="border-color:var(--geo-m);background:var(--geo-l)" onclick="goPage('geo')">
-      <div class="cd-num" style="color:var(--geo)">🌍</div>
-      <div><div class="cd-date">Segunda · 22/06</div><div class="cd-title">🌍 PROVA de Geografia</div><div class="cd-desc">Un.4 Lugar para morar · Un.5 Meus caminhos · Depois: revisão rápida de Matemática</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-mat" style="margin-left:5px">Revisar Matemática</span></div>
-    </div>
-    <div class="crono-day prova-day" style="border-color:var(--mat-m);background:var(--mat-l)" onclick="goPage('mat')">
-      <div class="cd-num" style="color:var(--mat)">🔢</div>
-      <div><div class="cd-date">Terça · 23/06</div><div class="cd-title">🔢 PROVA de Matemática</div><div class="cd-desc">L1: Cap.1+4 · L2: Cap.6+7+8 · Depois: revisão rápida de História</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-his" style="margin-left:5px">Revisar História</span></div>
-    </div>
-    <div class="crono-day prova-day" style="border-color:var(--his-m);background:var(--his-l)" onclick="goPage('his')">
-      <div class="cd-num" style="color:var(--his)">🏛️</div>
-      <div><div class="cd-date">Quarta · 24/06</div><div class="cd-title">🏛️ PROVA de História</div><div class="cd-desc">Un.3+4+5 Histórias de famílias e escolas · Depois: revisão rápida de Ciências</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-cie" style="margin-left:5px">Revisar Ciências</span></div>
-    </div>
-    <div class="crono-day prova-day" style="border-color:var(--cie-m);background:var(--cie-l)" onclick="goPage('cie')">
-      <div class="cd-num" style="color:var(--cie)">🔬</div>
-      <div><div class="cd-date">Quinta · 25/06</div><div class="cd-title">🔬 PROVA de Ciências</div><div class="cd-desc">L1:Cap.5 · L2:Cap.6+7 · Depois: revisão leve de Português</div><span class="cd-badge b-prova">📝 Prova!</span><span class="cd-badge b-lp" style="margin-left:5px">Revisar Português</span></div>
-    </div>
-    <div class="crono-day prova-day" style="border-color:var(--lp-m);background:var(--lp-l)" onclick="goPage('lp')">
-      <div class="cd-num" style="color:var(--lp)">📖</div>
-      <div><div class="cd-date">Sexta · 26/06</div><div class="cd-title">📖 PROVA de Português</div><div class="cd-desc">F/V · P/B · GU/QU · C/QU · H · CH/LH/NH · Sílaba · Frase · Gêneros</div><span class="cd-badge b-prova">📝 Última prova!</span></div>
+  <div class="crono-intro" style="background:var(--srf);border-radius:22px;border:1.5px solid var(--bd);padding:18px 20px;margin-bottom:20px;box-shadow:var(--sh1);display:flex;gap:14px;align-items:flex-start">
+    <span style="font-size:2.2rem;flex-shrink:0">🗺️</span>
+    <div>
+      <div style="font-family:'Baloo 2',cursive;font-size:1.15rem;margin-bottom:4px">Como funciona o plano</div>
+      <div style="font-size:.82rem;color:var(--tx2);line-height:1.5"><b>Fase 1 — Revisão Geral:</b> estude cada matéria com calma, no seu tempo, quando puder. Sem pressa!<br><b>Fase 2 — Reforço:</b> na véspera de cada prova, dê uma revisada rápida para deixar tudo fresquinho na memória. 🌟</div>
     </div>
   </div>
+
+  <!-- FASE 1 -->
+  <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:0 0 12px;display:flex;align-items:center;gap:8px">📚 Fase 1 — Revisão Geral <span class="stag" style="font-family:'Nunito',sans-serif">No seu tempo</span></div>
+  <div class="crono-grid">
+    <div class="crono-day" onclick="goPage('geo')">
+      <div class="cd-num" style="color:var(--geo)">🌍</div>
+      <div><div class="cd-date">Quando puder</div><div class="cd-title">🌍 Geografia — Revisão Geral</div><div class="cd-desc">Lugar para morar · pontos de referência · tipos de moradia · planta e maquete</div><span class="cd-badge b-geo countdown" data-prova="2026-06-22">Calculando...</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('mat')">
+      <div class="cd-num" style="color:var(--mat)">🔢</div>
+      <div><div class="cd-date">Quando puder</div><div class="cd-title">🔢 Matemática — Revisão Geral</div><div class="cd-desc">CDU · ordinais · contagens · operações · dinheiro, troco e cédulas</div><span class="cd-badge b-mat countdown" data-prova="2026-06-23">Calculando...</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('his')">
+      <div class="cd-num" style="color:var(--his)">🏛️</div>
+      <div><div class="cd-date">Quando puder</div><div class="cd-title">🏛️ História — Revisão Geral</div><div class="cd-desc">Árvore genealógica · graus de parentesco · escola ribeirinha · tradições</div><span class="cd-badge b-his countdown" data-prova="2026-06-24">Calculando...</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('cie')">
+      <div class="cd-num" style="color:var(--cie)">🔬</div>
+      <div><div class="cd-date">Quando puder</div><div class="cd-title">🔬 Ciências — Revisão Geral</div><div class="cd-desc">Relações entre seres vivos · materiais · propriedades dos materiais</div><span class="cd-badge b-cie countdown" data-prova="2026-06-25">Calculando...</span></div>
+    </div>
+    <div class="crono-day" onclick="goPage('lp')">
+      <div class="cd-num" style="color:var(--lp)">📖</div>
+      <div><div class="cd-date">Quando puder</div><div class="cd-title">📖 Português — Revisão Geral</div><div class="cd-desc">GU/QU · F/V · P/B · C/QU · H · CH/LH/NH · sílaba · frase · gêneros</div><span class="cd-badge b-lp countdown" data-prova="2026-06-26">Calculando...</span></div>
+    </div>
+  </div>
+
+  <!-- FASE 2 -->
+  <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:22px 0 12px;display:flex;align-items:center;gap:8px">⚡ Fase 2 — Reforço na Véspera <span class="stag" style="font-family:'Nunito',sans-serif">Datas fixas</span></div>
+  <div class="crono-grid">
+    <div class="crono-day" style="border-color:var(--geo-m)" onclick="goPage('geo')">
+      <div class="cd-num" style="color:var(--geo)">20</div>
+      <div><div class="cd-date">Sábado · 20/06</div><div class="cd-title">🌍 Reforço de Geografia</div><div class="cd-desc">Revisão rápida antes da prova de segunda. (A véspera é a Festa Junina, então o reforço fica no sábado!)</div><span class="cd-badge b-geo">Prova segunda 22/06</span></div>
+    </div>
+
+    <div class="crono-day pausa">
+      <div class="cd-num">🎉</div>
+      <div><div class="cd-date">Domingo · 21/06</div><div class="cd-title">Festa Junina! 🌽</div><div class="cd-desc">Dia de festa e descanso. Nada de estudos — aproveite e divirta-se!</div><span class="cd-badge b-pausa">Festa e descanso!</span></div>
+    </div>
+
+    <div class="crono-day prova-day" style="border-color:var(--mat-m);background:var(--mat-l)" onclick="goPage('mat')">
+      <div class="cd-num" style="color:var(--mat)">22</div>
+      <div><div class="cd-date">Segunda · 22/06</div><div class="cd-title">🔢 Reforço de Matemática <span style="font-size:.72rem;color:var(--geo-d)">· 🌍 Prova de Geografia hoje!</span></div><div class="cd-desc">Hoje tem prova de Geografia! E, à noite, reforço de Matemática para a prova de amanhã.</div><span class="cd-badge b-mat">Prova terça 23/06</span></div>
+    </div>
+
+    <div class="crono-day prova-day" style="border-color:var(--his-m);background:var(--his-l)" onclick="goPage('his')">
+      <div class="cd-num" style="color:var(--his)">23</div>
+      <div><div class="cd-date">Terça · 23/06</div><div class="cd-title">🏛️ Reforço de História <span style="font-size:.72rem;color:var(--mat-d)">· 🔢 Prova de Matemática hoje!</span></div><div class="cd-desc">Prova de Matemática hoje! Depois, reforço de História para a prova de amanhã.</div><span class="cd-badge b-his">Prova quarta 24/06</span></div>
+    </div>
+
+    <div class="crono-day prova-day" style="border-color:var(--cie-m);background:var(--cie-l)" onclick="goPage('cie')">
+      <div class="cd-num" style="color:var(--cie)">24</div>
+      <div><div class="cd-date">Quarta · 24/06</div><div class="cd-title">🔬 Reforço de Ciências <span style="font-size:.72rem;color:var(--his-d)">· 🏛️ Prova de História hoje!</span></div><div class="cd-desc">Prova de História hoje! Depois, reforço de Ciências para a prova de amanhã.</div><span class="cd-badge b-cie">Prova quinta 25/06</span></div>
+    </div>
+
+    <div class="crono-day prova-day" style="border-color:var(--lp-m);background:var(--lp-l)" onclick="goPage('lp')">
+      <div class="cd-num" style="color:var(--lp)">25</div>
+      <div><div class="cd-date">Quinta · 25/06</div><div class="cd-title">📖 Reforço de Português <span style="font-size:.72rem;color:var(--cie-d)">· 🔬 Prova de Ciências hoje!</span></div><div class="cd-desc">Prova de Ciências hoje! Depois, reforço de Português para a última prova.</div><span class="cd-badge b-lp">Prova sexta 26/06</span></div>
+    </div>
+
+    <div class="crono-day prova-day" style="border-color:var(--lp-m);background:var(--lp-l)" onclick="goPage('lp')">
+      <div class="cd-num" style="color:var(--lp)">📖</div>
+      <div><div class="cd-date">Sexta · 26/06</div><div class="cd-title" style="color:var(--lp-d)">📖 PROVA de Português</div><div class="cd-desc">A última prova! Depois é só comemorar — você arrasou! 🎉</div><span class="cd-badge b-prova">📝 Última prova!</span></div>
+    </div>
+  </div>
+
+  
 
   <div class="stitle">📚 Ir para uma matéria</div>
   <div class="subj-grid">
