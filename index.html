@@ -392,6 +392,238 @@ footer div{font-size:.72rem;color:var(--tx3);}
 .resumo-text b{color:var(--tx);}
 .resumo-item.done .resumo-text b{color:var(--tx3);}
 
+
+/* ── POLIMENTO HOME: MISSÃO, PROGRESSO E CENTRAL DE REVISÃO ── */
+.mission-card{
+  background:var(--surface);
+  border:2px solid var(--border);
+  border-radius:24px;
+  padding:18px 20px;
+  margin-bottom:18px;
+  box-shadow:var(--sh-sm);
+}
+.mission-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.mission-ico{font-size:1.8rem;}
+.mission-title{
+  font-family:'Baloo 2',cursive;
+  font-size:1.15rem;
+  line-height:1.1;
+}
+.mission-sub{
+  font-size:.78rem;
+  color:var(--tx2);
+  line-height:1.45;
+}
+.mission-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+.mission-step{
+  background:var(--surface2);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:.8rem;
+  font-weight:800;
+  color:var(--tx2);
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+.exam-progress{
+  background:linear-gradient(135deg,#fff8e6,#ffffff);
+  border:2px solid #fde68a;
+  border-radius:24px;
+  padding:16px 18px;
+  margin-bottom:18px;
+  box-shadow:var(--sh-sm);
+}
+.exam-progress-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+.exam-progress-title{
+  font-family:'Baloo 2',cursive;
+  font-size:1.1rem;
+  line-height:1.1;
+}
+.exam-progress-sub{
+  font-size:.76rem;
+  color:#7a4f00;
+  line-height:1.45;
+  margin-top:2px;
+}
+.exam-progress-pct{
+  font-family:'Baloo 2',cursive;
+  color:#b45309;
+  font-size:1.25rem;
+  white-space:nowrap;
+}
+.exam-bar-wrap{
+  height:14px;
+  background:rgba(180,83,9,.14);
+  border-radius:999px;
+  overflow:hidden;
+}
+.exam-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--gold),#ff9d00);
+  border-radius:999px;
+  transition:width .5s ease;
+}
+.exam-dots{
+  display:flex;
+  justify-content:space-between;
+  gap:6px;
+  margin-top:10px;
+}
+.exam-dot{
+  flex:1;
+  min-width:0;
+  text-align:center;
+  background:rgba(255,255,255,.75);
+  border:1.5px solid #fde68a;
+  border-radius:12px;
+  padding:7px 4px;
+  font-size:.73rem;
+  font-weight:900;
+  color:#b45309;
+}
+.exam-dot.done{
+  background:var(--green-l);
+  border-color:var(--green);
+  color:#065f46;
+}
+.finish-banner{
+  display:none;
+  background:linear-gradient(135deg,#fff8e6,#ecfdf5);
+  border:2px solid #fde68a;
+  border-radius:28px;
+  padding:24px 20px;
+  margin-bottom:20px;
+  text-align:center;
+  box-shadow:var(--sh-md);
+}
+.finish-banner.show{display:block;animation:fu .35s ease;}
+.finish-emo{font-size:3rem;display:block;margin-bottom:8px;}
+.finish-title{
+  font-family:'Baloo 2',cursive;
+  font-size:1.55rem;
+  color:#b45309;
+  line-height:1.1;
+}
+.finish-msg{
+  font-size:.9rem;
+  color:var(--tx2);
+  line-height:1.5;
+  margin-top:8px;
+}
+.review-hub{
+  background:linear-gradient(135deg,#ffffff 0%,#fff8e6 100%)!important;
+  border-color:#fde68a!important;
+  cursor:default;
+}
+.review-hub .cd-title{
+  font-family:'Baloo 2',cursive;
+  font-size:1.05rem;
+  color:#b45309;
+}
+.review-actions{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:7px;
+  margin-top:11px;
+}
+.review-btn{
+  border:1.5px solid;
+  border-radius:999px;
+  padding:8px 10px;
+  font-family:'Nunito',sans-serif;
+  font-size:.76rem;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:var(--sh-sm);
+  background:var(--surface);
+  transition:transform .15s,box-shadow .15s,opacity .15s;
+}
+.review-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--sh-md);
+}
+.review-btn.geo{background:var(--geo-l);color:#00897b;border-color:var(--geo-m);}
+.review-btn.mat{background:var(--mat-l);color:#1e62c4;border-color:var(--mat-m);}
+.review-btn.his{background:var(--his-l);color:#c0392b;border-color:var(--his-m);}
+.review-btn.cie{background:var(--cie-l);color:#065f46;border-color:var(--cie-m);}
+.review-btn.lp{background:var(--lp-l);color:var(--lp);border-color:var(--lp-m);}
+.sim-celebration{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.52);
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.sim-celebration.show{
+  display:flex;
+  animation:fadeIn .25s ease;
+}
+.sim-celebration-card{
+  background:#fff;
+  border-radius:28px;
+  max-width:360px;
+  width:100%;
+  padding:30px 24px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+  animation:popCard .42s cubic-bezier(.3,1.3,.5,1);
+}
+.sim-celebration-emo{
+  font-size:3.4rem;
+  display:block;
+  margin-bottom:6px;
+}
+.sim-celebration-title{
+  font-family:'Baloo 2',cursive;
+  font-size:1.55rem;
+  color:var(--gold);
+  line-height:1.1;
+}
+.sim-celebration-msg{
+  font-size:.9rem;
+  color:var(--tx2);
+  line-height:1.5;
+  margin:8px 0 16px;
+}
+.sim-celebration-btn{
+  background:linear-gradient(135deg,var(--gold),#ff9d00);
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  padding:10px 24px;
+  font-family:'Nunito',sans-serif;
+  font-weight:900;
+  cursor:pointer;
+}
+@media(max-width:500px){
+  .mission-list{grid-template-columns:1fr;}
+  .exam-dots{display:grid;grid-template-columns:repeat(5,1fr);}
+  .exam-dot{font-size:.68rem;padding:6px 2px;}
+  .review-actions{grid-template-columns:repeat(2,1fr);}
+}
+
 /* Fundo claro fixo para evitar interferência de tema escuro do navegador/preview */
 html,body,.shell,.main,.page,.page.active{background:#fafaf8;}
 </style>
@@ -441,6 +673,47 @@ html,body,.shell,.main,.page,.page.active{background:#fafaf8;}
     </div>
   </div>
 
+  <div class="finish-banner" id="finishBanner">
+    <span class="finish-emo">🎉</span>
+    <div class="finish-title">Parabéns, Joaquim!</div>
+    <div class="finish-msg">Você concluiu a semana de provas. Agora é hora de respirar, comemorar e aproveitar bastante! ⭐</div>
+  </div>
+
+  <div class="mission-card">
+    <div class="mission-head">
+      <span class="mission-ico">🏆</span>
+      <div>
+        <div class="mission-title">Missão das Provas</div>
+        <div class="mission-sub">Use o portal como um mapa: revise, treine, simule e escolha o melhor momento para estudar dentro da rotina da família.</div>
+      </div>
+    </div>
+    <div class="mission-list">
+      <div class="mission-step">⭐ Faça a Super Revisão</div>
+      <div class="mission-step">🃏 Vire os flashcards</div>
+      <div class="mission-step">✏️ Complete os treinos</div>
+      <div class="mission-step">📝 Faça o simulado</div>
+      <div class="mission-step">⚡ Enfrente o desafio relâmpago</div>
+    </div>
+  </div>
+
+  <div class="exam-progress" id="examProgress">
+    <div class="exam-progress-top">
+      <div>
+        <div class="exam-progress-title">Progresso da semana de provas</div>
+        <div class="exam-progress-sub" id="examProgressSub">De 22 a 26 de junho · uma etapa por dia.</div>
+      </div>
+      <div class="exam-progress-pct" id="examProgressPct">0%</div>
+    </div>
+    <div class="exam-bar-wrap"><div class="exam-bar" id="examBar"></div></div>
+    <div class="exam-dots">
+      <div class="exam-dot" data-exam="2026-06-22">🌍 Geo</div>
+      <div class="exam-dot" data-exam="2026-06-23">🔢 Mat</div>
+      <div class="exam-dot" data-exam="2026-06-24">🏛️ Hist</div>
+      <div class="exam-dot" data-exam="2026-06-25">🔬 Cien</div>
+      <div class="exam-dot" data-exam="2026-06-26">📖 Port</div>
+    </div>
+  </div>
+
   <!-- FASE 1 -->
   <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:0 0 12px;display:flex;align-items:center;gap:8px">📚 Fase 1 — Revisão Geral <span class="stag" style="font-family:'Nunito',sans-serif">⭐ Super Revisão</span></div>
   <div class="crono-grid">
@@ -469,9 +742,21 @@ html,body,.shell,.main,.page,.page.active{background:#fafaf8;}
   <!-- FASE 2 -->
   <div class="crono-phase-title" style="font-family:'Baloo 2',cursive;font-size:1.05rem;margin:22px 0 12px;display:flex;align-items:center;gap:8px">⚡ Fase 2 — Provas e Revisões <span class="stag" style="font-family:'Nunito',sans-serif">Rotina flexível</span></div>
   <div class="crono-grid">
-    <div class="crono-day" style="border-color:var(--geo-m)" onclick="goPage('geo')">
-      <div class="cd-num" style="color:var(--geo)">20</div>
-      <div><div class="cd-date">Sábado · 20/06</div><div class="cd-title">⭐ Super Revisão Geral</div><div class="cd-desc">Revise um pouquinho de todas as matérias, dando atenção especial à Geografia, que será a primeira prova.</div><span class="cd-badge b-geo">Foco maior: Geografia</span></div>
+    <div class="crono-day review-hub">
+      <div class="cd-num" style="color:#b45309">20</div>
+      <div>
+        <div class="cd-date">Sábado · 20/06</div>
+        <div class="cd-title">⭐ Super Revisão Geral</div>
+        <div class="cd-desc">Escolha por onde começar e revise um pouquinho de cada matéria. Dica: dê atenção especial à Geografia, que será a primeira prova.</div>
+        <div class="review-actions" aria-label="Escolha uma matéria para revisar">
+          <button class="review-btn geo" onclick="goPage('geo')">🌍 Geografia</button>
+          <button class="review-btn mat" onclick="goPage('mat')">🔢 Matemática</button>
+          <button class="review-btn his" onclick="goPage('his')">🏛️ História</button>
+          <button class="review-btn cie" onclick="goPage('cie')">🔬 Ciências</button>
+          <button class="review-btn lp" onclick="goPage('lp')">📖 Português</button>
+        </div>
+        <span class="cd-badge b-geo">Sugestão: começar por Geografia</span>
+      </div>
     </div>
 
     <div class="crono-day pausa">
@@ -491,7 +776,7 @@ html,body,.shell,.main,.page,.page.active{background:#fafaf8;}
 
     <div class="crono-day prova-day" style="border-color:var(--cie-m);background:var(--cie-l)" onclick="goPage('cie')">
       <div class="cd-num" style="color:var(--cie)">24</div>
-      <div><div class="cd-date">Quarta · 24/06</div><div class="cd-title">🏛️ Prova de História <span style="font-size:.72rem;color:var(--cie-d)">· 🔬 Revisão de Ciências</span></div><div class="cd-desc">Hoje é a prova de História. Também vale revisar Ciências com calma, antes da próxima prova, no horário mais possível.</div><span class="cd-badge b-cie">Próxima prova: Ciências 25/06</span></div>
+      <div><div class="cd-date">Quarta · 24/06</div><div class="cd-title">🏛️ Prova de História <span style="font-size:.72rem;color:var(--cie-d)">· 🔬 Revisão de Ciências</span></div><div class="cd-desc">Hoje é a prova de História. Também vale revisar Ciências com calma, antes da próxima prova, no horário que for possível.</div><span class="cd-badge b-cie">Próxima prova: Ciências 25/06</span></div>
     </div>
 
     <div class="crono-day prova-day" style="border-color:var(--lp-m);background:var(--lp-l)" onclick="goPage('lp')">
@@ -1240,6 +1525,15 @@ html,body,.shell,.main,.page,.page.active{background:#fafaf8;}
   </div>
 </div>
 
+<div class="sim-celebration" id="simCelebration">
+  <div class="sim-celebration-card">
+    <span class="sim-celebration-emo">🌟🌟🌟</span>
+    <div class="sim-celebration-title">Excelente!</div>
+    <div class="sim-celebration-msg">Você foi muito bem no simulado. Respira fundo: você está se preparando com capricho! 🚀</div>
+    <button class="sim-celebration-btn" onclick="closeSimCelebration()">Continuar</button>
+  </div>
+</div>
+
 <footer>
   <div><strong>Feito com 💛 por Aninha, mãe do Joca</strong></div>
   <div style="margin-top:6px;font-size:.68rem;line-height:1.45;color:var(--tx3)">Material inspirado nos conteúdos trabalhados pela escola e pelos livros didáticos, elaborado apenas para apoiar os estudos em casa. Sem finalidade comercial e complementar aos materiais escolares.</div>
@@ -1474,6 +1768,57 @@ function updateCountdowns(){
 }
 updateCountdowns();
 
+function parseLocalDate(iso){
+  var p=iso.split('-');
+  return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));
+}
+
+function updateExamProgress(){
+  var hoje=new Date();
+  hoje.setHours(0,0,0,0);
+  var exams=[
+    {date:'2026-06-22',name:'Geografia'},
+    {date:'2026-06-23',name:'Matemática'},
+    {date:'2026-06-24',name:'História'},
+    {date:'2026-06-25',name:'Ciências'},
+    {date:'2026-06-26',name:'Português'}
+  ];
+  var done=0;
+  exams.forEach(function(ex){
+    var d=parseLocalDate(ex.date);
+    d.setHours(0,0,0,0);
+    if(hoje>d)done++;
+  });
+  var pct=Math.round(done/exams.length*100);
+  var bar=document.getElementById('examBar');
+  var pctEl=document.getElementById('examProgressPct');
+  var sub=document.getElementById('examProgressSub');
+  if(bar)bar.style.width=pct+'%';
+  if(pctEl)pctEl.textContent=pct+'%';
+  document.querySelectorAll('.exam-dot').forEach(function(dot){
+    var d=parseLocalDate(dot.dataset.exam);
+    d.setHours(0,0,0,0);
+    if(hoje>d)dot.classList.add('done');
+  });
+  if(sub){
+    if(done===0)sub.textContent='De 22 a 26 de junho · uma etapa por dia.';
+    else if(done<exams.length)sub.textContent='Você já passou por '+done+' de '+exams.length+' provas. Continue no seu ritmo!';
+    else sub.textContent='Semana de provas concluída. Missão cumprida!';
+  }
+  var finish=document.getElementById('finishBanner');
+  if(finish&&done===exams.length)finish.classList.add('show');
+}
+updateExamProgress();
+
+function showSimCelebration(){
+  var modal=document.getElementById('simCelebration');
+  if(modal)modal.classList.add('show');
+}
+function closeSimCelebration(){
+  var modal=document.getElementById('simCelebration');
+  if(modal)modal.classList.remove('show');
+}
+
 /* ══ NAV ══ */
 function goPage(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
@@ -1522,6 +1867,7 @@ function buildQuiz(id,questions,nxtCls){
     if(subj&&earned>0){ addPts(subj,earned); }
     var earnedTxt=earned>0?'<div style="font-family:\'Baloo 2\',cursive;font-size:1.1rem;color:var(--gold);margin:6px 0">⭐ +'+earned+' estrelas!</div>':'';
     container.innerHTML='<div class="qz-fin"><span class="qz-fin-emo">'+e+'</span><div class="qz-fin-score">'+correct+' de '+questions.length+' certas!</div>'+earnedTxt+'<div class="qz-fin-msg">'+m+'</div><button class="qz-retry">🔄 Tentar de novo</button></div>';
+    if(id.indexOf('qz-sim-')===0 && pct>=90 && typeof showSimCelebration==='function'){setTimeout(showSimCelebration,450);}
     container.querySelector('.qz-retry').addEventListener('click',function(){buildQuiz(id,questions,nxtCls);});
   }
   render();
